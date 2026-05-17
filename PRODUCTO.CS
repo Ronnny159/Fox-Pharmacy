@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Entities;
+namespace Entity;
 
 /// <summary>
 /// Información legal y estática del fármaco, independiente del lote.
