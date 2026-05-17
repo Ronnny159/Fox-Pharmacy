@@ -1,6 +1,6 @@
 using System;
 
-namespace Entities;
+namespace Entity;
 
 /// <summary>
 /// Auditoría específica para cambios en descuentos individuales de productos.

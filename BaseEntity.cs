@@ -1,6 +1,6 @@
 using System;
 
-namespace Entities;
+namespace Entity;
 
 /// <summary>
 /// Clase base abstracta para todas las entidades del sistema.

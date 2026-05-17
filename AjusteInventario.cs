@@ -1,6 +1,6 @@
 using System;
 
-namespace Entities;
+namespace Entity;
 
 /// <summary>
 /// Registro de auditoría para cualquier movimiento de inventario

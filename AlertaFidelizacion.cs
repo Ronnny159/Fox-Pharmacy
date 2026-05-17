@@ -1,6 +1,6 @@
 using System;
 
-namespace Entities;
+namespace Entity;
 
 /// <summary>
 /// Representa una alerta o notificación enviada a un paciente

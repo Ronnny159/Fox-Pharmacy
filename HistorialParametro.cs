@@ -1,6 +1,6 @@
 using System;
 
-namespace Entities;
+namespace Entity;
 
 /// <summary>
 /// Registro histórico de cambios en parámetros del sistema.

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Entities;
+namespace Entity;
 
 /// <summary>
 /// Encabezado de cada transacción comercial (factura de venta).

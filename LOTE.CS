@@ -1,6 +1,6 @@
 using System;
 
-namespace Entities;
+namespace Entity;
 
 /// <summary>
 /// Gestión de la inversión por adquisición: cada compra al proveedor

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Entities;
+namespace Entity;
 
 /// <summary>
 /// Paciente o cliente frecuente de la farmacia.

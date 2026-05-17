@@ -1,6 +1,6 @@
 using System;
 
-namespace Entities;
+namespace Entity;
 
 /// <summary>
 /// Registro granular de cada ítem vendido, con trazabilidad completa al lote de origen.
