@@ -1,22 +1,46 @@
 using System;
 
-namespace Entities
+namespace Entities;
+
+/// <summary>
+/// Registro granular de cada ítem vendido, con trazabilidad completa al lote de origen.
+/// Materializa la exigencia de trazabilidad del informe técnico.
+/// </summary>
+public class DetalleVenta : BaseEntity
 {
-    public class DetalleVenta
-    {
-        public int DetalleId { get; set; }
-        public int VentaId { get; set; }
-        public int LoteId { get; set; }
-        public int Cantidad { get; set; }
-        public decimal PrecioUnitario { get; set; }
-        public decimal DescuentoAplicado { get; set; }
+    /// <summary>
+    /// Identificador de la venta a la que pertenece este detalle.
+    /// </summary>
+    public int VentaId { get; set; }
 
-        // Navegación
-        public Lote Lote { get; set; }
-        public Venta Venta { get; set; }
+    /// <summary>
+    /// Identificador del lote del que se extrajo la mercancía.
+    /// Dato crítico para trazabilidad y auditorías sanitarias.
+    /// </summary>
+    public int LoteId { get; set; }
 
-        // Propiedades calculadas
-        public decimal Subtotal => Cantidad * PrecioUnitario;
-        public decimal SubtotalConDescuento => Subtotal * (1 - DescuentoAplicado / 100);
-    }
+    /// <summary>
+    /// Cantidad de unidades vendidas de ese lote específico.
+    /// </summary>
+    public int Cantidad { get; set; }
+
+    /// <summary>
+    /// Precio unitario aplicado en el momento de la venta.
+    /// Puede diferir del precio actual del lote si hubo descuento.
+    /// </summary>
+    public decimal PrecioAplicado { get; set; }
+
+    /// <summary>
+    /// Descuento unitario aplicado a este ítem (por vencimiento, fidelidad, promoción).
+    /// </summary>
+    public decimal DescuentoUnitario { get; set; }
+
+    /// <summary>
+    /// Subtotal calculado: (PrecioAplicado - DescuentoUnitario) * Cantidad.
+    /// </summary>
+    public decimal Subtotal => (PrecioAplicado - DescuentoUnitario) * Cantidad;
+
+    // Propiedades navegacionales
+    public virtual Venta Venta { get; set; } = null!;
+    public virtual Lote Lote { get; set; } = null!;
 }
