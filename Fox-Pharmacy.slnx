@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="DAL/DAL.csproj" />
+  <Project Path="ENTITY/Entity.csproj" />
+  <Project Path="GUI/GUI.csproj" Id="6f65b1d1-8b0e-45fa-b433-7bc368b5cdf5" />
+</Solution>
