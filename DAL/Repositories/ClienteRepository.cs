@@ -1,7 +1,7 @@
-using Oracle.ManagedDataAccess.Client;
 using DAL.Core;
 using DAL.Interfaces;
 using Entity;
+using Oracle.ManagedDataAccess.Client;
 
 namespace DAL.Repositories;
 
