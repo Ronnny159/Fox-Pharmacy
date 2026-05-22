@@ -1,0 +1,55 @@
+-- ============================================
+-- PharmaSmart - Script 05
+-- Creación de Tipos Personalizados
+-- Ejecutar como PHARMA_USER
+-- ============================================
+
+SET SERVEROUTPUT ON;
+SET ECHO ON;
+
+-- Tipo para retornar información de lote
+CREATE OR REPLACE TYPE T_LOTE_INFO AS OBJECT (
+    ID NUMBER,
+    CODIGO_LOTE VARCHAR2(100),
+    PRODUCTO_ID NUMBER,
+    FECHA_VENCIMIENTO DATE,
+    PRECIO_COMPRA NUMBER(10,2),
+    PRECIO_VENTA NUMBER(10,2),
+    CANTIDAD_ACTUAL NUMBER,
+    ESTADO NUMBER
+);
+/
+
+-- Tipo para retornar información de venta
+CREATE OR REPLACE TYPE T_VENTA_INFO AS OBJECT (
+    ID NUMBER,
+    NUMERO_FACTURA VARCHAR2(20),
+    FECHA_VENTA DATE,
+    TOTAL NUMBER(12,2),
+    ANULADA NUMBER(1)
+);
+/
+
+-- Tipo para retornar productos top
+CREATE OR REPLACE TYPE T_TOP_PRODUCTO AS OBJECT (
+    CODIGO VARCHAR2(50),
+    NOMBRE VARCHAR2(200),
+    UNIDADES_VENDIDAS NUMBER,
+    TOTAL_VENDIDO NUMBER
+);
+/
+
+-- Tipo tabla para lotes
+CREATE OR REPLACE TYPE T_LOTE_TABLA AS TABLE OF T_LOTE_INFO;
+/
+
+-- Tipo tabla para productos top
+CREATE OR REPLACE TYPE T_TOP_PRODUCTO_TABLA AS TABLE OF T_TOP_PRODUCTO;
+/
+
+COMMIT;
+
+SELECT 'Tipos creados: 5' AS MENSAJE FROM DUAL;
+SELECT TYPE_NAME, TYPECODE FROM USER_TYPES WHERE TYPE_NAME LIKE 'T_%' ORDER BY TYPE_NAME;
+
+EXIT;
