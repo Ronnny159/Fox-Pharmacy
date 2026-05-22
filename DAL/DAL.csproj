@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.*" />
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="*" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.*" />
   </ItemGroup>
 
   <ItemGroup>
