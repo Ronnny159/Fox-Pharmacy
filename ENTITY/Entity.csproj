@@ -4,8 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>PharmaSmart.Entities</RootNamespace>
-    <AssemblyName>PharmaSmart.Entities</AssemblyName>
+    <RootNamespace>Entity</RootNamespace>
+    <AssemblyName>Entity</AssemblyName>
   </PropertyGroup>
 
 </Project>
