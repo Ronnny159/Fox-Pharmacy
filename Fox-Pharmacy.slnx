@@ -1,5 +1,5 @@
 <Solution>
   <Project Path="DAL/DAL.csproj" />
   <Project Path="ENTITY/Entity.csproj" />
-  <Project Path="GUI/GUI.csproj" Id="6f65b1d1-8b0e-45fa-b433-7bc368b5cdf5" />
+  <Project Path="GUI/GUI.csproj" Id="c0e69eb2-b838-4c39-94bb-996f9f906965" />
 </Solution>

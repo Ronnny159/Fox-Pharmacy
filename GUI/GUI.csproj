@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6F65B1D1-8B0E-45FA-B433-7BC368B5CDF5}</ProjectGuid>
+    <ProjectGuid>{C0E69EB2-B838-4C39-94BB-996F9F906965}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>GUI</RootNamespace>
     <AssemblyName>GUI</AssemblyName>
@@ -46,42 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlertasForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AlertasForm.Designer.cs">
-      <DependentUpon>AlertasForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DetalleVentaForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DetalleVentaForm.Designer.cs">
-      <DependentUpon>DetalleVentaForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="HistorialVentasForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HistorialVentasForm.Designer.cs">
-      <DependentUpon>HistorialVentasForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LotesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LotesForm.Designer.cs">
-      <DependentUpon>LotesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProductosForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ProductosForm.Designer.cs">
-      <DependentUpon>ProductosForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,24 +54,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ReportesForm.Designer.cs">
-      <DependentUpon>ReportesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UsuariosForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UsuariosForm.Designer.cs">
-      <DependentUpon>UsuariosForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VentasForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VentasForm.Designer.cs">
-      <DependentUpon>VentasForm.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -132,6 +79,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\txtbox222.png" />
+    <None Include="Resources\logo123.png" />
+    <None Include="Resources\OAICF90.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UserIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PsswrdIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
