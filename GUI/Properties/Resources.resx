@@ -118,11 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PsswrdIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PsswrdIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="1stName" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1stName.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="2stName" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2stName.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="1stSurname" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1stSurname.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="txtbox222" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\txtbox222.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="OAICF90" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OAICF90.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NameIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NameIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logo123" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo123.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -130,7 +142,10 @@
   <data name="UserIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UserIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PsswrdIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PsswrdIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="OAICF90" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OAICF90.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="2stSurname" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2stSurname.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

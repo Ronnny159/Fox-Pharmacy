@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnSalir = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelIniciarSesion = new System.Windows.Forms.Panel();
             this.btnRegistrarse = new System.Windows.Forms.Button();
             this.btnEntrar = new System.Windows.Forms.Button();
             this.panelContraseña = new System.Windows.Forms.Panel();
@@ -39,6 +39,28 @@
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.panelRegistrarse = new System.Windows.Forms.Panel();
+            this.panel2doApellido = new System.Windows.Forms.Panel();
+            this.txt2doApellido = new System.Windows.Forms.TextBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.panel1erApellido = new System.Windows.Forms.Panel();
+            this.txt1erApellido = new System.Windows.Forms.TextBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.panel2doNombre = new System.Windows.Forms.Panel();
+            this.txt2doNombre = new System.Windows.Forms.TextBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.panelContraseñaRegistro = new System.Windows.Forms.Panel();
+            this.txtContraseñaRegistro = new System.Windows.Forms.TextBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.btnIniciarSesion = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.panelUsuarioRegistro = new System.Windows.Forms.Panel();
+            this.txtUsuarioRegistro = new System.Windows.Forms.TextBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel1erNombre = new System.Windows.Forms.Panel();
+            this.txt1erNombre = new System.Windows.Forms.TextBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panelIzquierdo = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -46,11 +68,24 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel2.SuspendLayout();
+            this.panelIniciarSesion.SuspendLayout();
             this.panelContraseña.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panelUsuario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panelRegistrarse.SuspendLayout();
+            this.panel2doApellido.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            this.panel1erApellido.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            this.panel2doNombre.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            this.panelContraseñaRegistro.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            this.panelUsuarioRegistro.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            this.panel1erNombre.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.panelIzquierdo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -70,17 +105,17 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click_1);
             // 
-            // panel2
+            // panelIniciarSesion
             // 
-            this.panel2.Controls.Add(this.btnRegistrarse);
-            this.panel2.Controls.Add(this.btnEntrar);
-            this.panel2.Controls.Add(this.panelContraseña);
-            this.panel2.Controls.Add(this.panelUsuario);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Location = new System.Drawing.Point(300, 42);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(450, 488);
-            this.panel2.TabIndex = 15;
+            this.panelIniciarSesion.Controls.Add(this.btnRegistrarse);
+            this.panelIniciarSesion.Controls.Add(this.btnEntrar);
+            this.panelIniciarSesion.Controls.Add(this.panelContraseña);
+            this.panelIniciarSesion.Controls.Add(this.panelUsuario);
+            this.panelIniciarSesion.Controls.Add(this.label4);
+            this.panelIniciarSesion.Location = new System.Drawing.Point(300, 42);
+            this.panelIniciarSesion.Name = "panelIniciarSesion";
+            this.panelIniciarSesion.Size = new System.Drawing.Size(450, 488);
+            this.panelIniciarSesion.TabIndex = 15;
             // 
             // btnRegistrarse
             // 
@@ -95,6 +130,7 @@
             this.btnRegistrarse.TabIndex = 19;
             this.btnRegistrarse.Text = "No tienes cuenta?";
             this.btnRegistrarse.UseVisualStyleBackColor = false;
+            this.btnRegistrarse.Click += new System.EventHandler(this.btnRegistrarse_Click);
             // 
             // btnEntrar
             // 
@@ -183,6 +219,250 @@
             this.label4.TabIndex = 15;
             this.label4.Text = "Iniciar Sesión";
             // 
+            // panelRegistrarse
+            // 
+            this.panelRegistrarse.Controls.Add(this.panel2doApellido);
+            this.panelRegistrarse.Controls.Add(this.panel1erApellido);
+            this.panelRegistrarse.Controls.Add(this.panel2doNombre);
+            this.panelRegistrarse.Controls.Add(this.panelContraseñaRegistro);
+            this.panelRegistrarse.Controls.Add(this.btnIniciarSesion);
+            this.panelRegistrarse.Controls.Add(this.button2);
+            this.panelRegistrarse.Controls.Add(this.panelUsuarioRegistro);
+            this.panelRegistrarse.Controls.Add(this.label5);
+            this.panelRegistrarse.Controls.Add(this.panel1erNombre);
+            this.panelRegistrarse.Location = new System.Drawing.Point(301, 42);
+            this.panelRegistrarse.Name = "panelRegistrarse";
+            this.panelRegistrarse.Size = new System.Drawing.Size(450, 488);
+            this.panelRegistrarse.TabIndex = 20;
+            this.panelRegistrarse.Visible = false;
+            // 
+            // panel2doApellido
+            // 
+            this.panel2doApellido.BackColor = System.Drawing.Color.GhostWhite;
+            this.panel2doApellido.Controls.Add(this.txt2doApellido);
+            this.panel2doApellido.Controls.Add(this.pictureBox9);
+            this.panel2doApellido.Location = new System.Drawing.Point(0, 214);
+            this.panel2doApellido.Name = "panel2doApellido";
+            this.panel2doApellido.Size = new System.Drawing.Size(449, 54);
+            this.panel2doApellido.TabIndex = 22;
+            // 
+            // txt2doApellido
+            // 
+            this.txt2doApellido.BackColor = System.Drawing.Color.GhostWhite;
+            this.txt2doApellido.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt2doApellido.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt2doApellido.Location = new System.Drawing.Point(79, 16);
+            this.txt2doApellido.Name = "txt2doApellido";
+            this.txt2doApellido.Size = new System.Drawing.Size(359, 22);
+            this.txt2doApellido.TabIndex = 1;
+            this.txt2doApellido.Click += new System.EventHandler(this.txt2doApellido_Click);
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = global::GUI.Properties.Resources._2stSurname;
+            this.pictureBox9.Location = new System.Drawing.Point(12, 0);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(57, 54);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox9.TabIndex = 0;
+            this.pictureBox9.TabStop = false;
+            // 
+            // panel1erApellido
+            // 
+            this.panel1erApellido.BackColor = System.Drawing.Color.GhostWhite;
+            this.panel1erApellido.Controls.Add(this.txt1erApellido);
+            this.panel1erApellido.Controls.Add(this.pictureBox8);
+            this.panel1erApellido.Location = new System.Drawing.Point(0, 154);
+            this.panel1erApellido.Name = "panel1erApellido";
+            this.panel1erApellido.Size = new System.Drawing.Size(449, 54);
+            this.panel1erApellido.TabIndex = 18;
+            // 
+            // txt1erApellido
+            // 
+            this.txt1erApellido.BackColor = System.Drawing.Color.GhostWhite;
+            this.txt1erApellido.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt1erApellido.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt1erApellido.Location = new System.Drawing.Point(79, 16);
+            this.txt1erApellido.Name = "txt1erApellido";
+            this.txt1erApellido.Size = new System.Drawing.Size(359, 22);
+            this.txt1erApellido.TabIndex = 1;
+            this.txt1erApellido.Click += new System.EventHandler(this.txt1erApellido_Click);
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = global::GUI.Properties.Resources._1stSurname;
+            this.pictureBox8.Location = new System.Drawing.Point(12, 0);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(57, 54);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox8.TabIndex = 0;
+            this.pictureBox8.TabStop = false;
+            // 
+            // panel2doNombre
+            // 
+            this.panel2doNombre.BackColor = System.Drawing.Color.GhostWhite;
+            this.panel2doNombre.Controls.Add(this.txt2doNombre);
+            this.panel2doNombre.Controls.Add(this.pictureBox7);
+            this.panel2doNombre.Location = new System.Drawing.Point(0, 94);
+            this.panel2doNombre.Name = "panel2doNombre";
+            this.panel2doNombre.Size = new System.Drawing.Size(449, 54);
+            this.panel2doNombre.TabIndex = 21;
+            // 
+            // txt2doNombre
+            // 
+            this.txt2doNombre.BackColor = System.Drawing.Color.GhostWhite;
+            this.txt2doNombre.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt2doNombre.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt2doNombre.Location = new System.Drawing.Point(79, 16);
+            this.txt2doNombre.Name = "txt2doNombre";
+            this.txt2doNombre.Size = new System.Drawing.Size(359, 22);
+            this.txt2doNombre.TabIndex = 1;
+            this.txt2doNombre.Click += new System.EventHandler(this.txt2doNombre_Click);
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::GUI.Properties.Resources._2stName;
+            this.pictureBox7.Location = new System.Drawing.Point(12, 0);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(57, 54);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox7.TabIndex = 0;
+            this.pictureBox7.TabStop = false;
+            // 
+            // panelContraseñaRegistro
+            // 
+            this.panelContraseñaRegistro.BackColor = System.Drawing.Color.GhostWhite;
+            this.panelContraseñaRegistro.Controls.Add(this.txtContraseñaRegistro);
+            this.panelContraseñaRegistro.Controls.Add(this.pictureBox6);
+            this.panelContraseñaRegistro.Location = new System.Drawing.Point(-1, 334);
+            this.panelContraseñaRegistro.Name = "panelContraseñaRegistro";
+            this.panelContraseñaRegistro.Size = new System.Drawing.Size(449, 54);
+            this.panelContraseñaRegistro.TabIndex = 20;
+            // 
+            // txtContraseñaRegistro
+            // 
+            this.txtContraseñaRegistro.BackColor = System.Drawing.Color.GhostWhite;
+            this.txtContraseñaRegistro.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtContraseñaRegistro.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContraseñaRegistro.Location = new System.Drawing.Point(79, 15);
+            this.txtContraseñaRegistro.Name = "txtContraseñaRegistro";
+            this.txtContraseñaRegistro.Size = new System.Drawing.Size(359, 22);
+            this.txtContraseñaRegistro.TabIndex = 2;
+            this.txtContraseñaRegistro.UseSystemPasswordChar = true;
+            this.txtContraseñaRegistro.Click += new System.EventHandler(this.txtContraseñaRegistro_Click);
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::GUI.Properties.Resources.PsswrdIcon;
+            this.pictureBox6.Location = new System.Drawing.Point(13, 0);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(57, 54);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 0;
+            this.pictureBox6.TabStop = false;
+            // 
+            // btnIniciarSesion
+            // 
+            this.btnIniciarSesion.BackColor = System.Drawing.Color.Transparent;
+            this.btnIniciarSesion.FlatAppearance.BorderSize = 0;
+            this.btnIniciarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIniciarSesion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIniciarSesion.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnIniciarSesion.Location = new System.Drawing.Point(259, 411);
+            this.btnIniciarSesion.Name = "btnIniciarSesion";
+            this.btnIniciarSesion.Size = new System.Drawing.Size(148, 35);
+            this.btnIniciarSesion.TabIndex = 19;
+            this.btnIniciarSesion.Text = "Ya tengo cuenta";
+            this.btnIniciarSesion.UseVisualStyleBackColor = false;
+            this.btnIniciarSesion.Click += new System.EventHandler(this.btnIniciarSesion_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(62, 411);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(148, 35);
+            this.button2.TabIndex = 16;
+            this.button2.Text = "Registrarse";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // panelUsuarioRegistro
+            // 
+            this.panelUsuarioRegistro.BackColor = System.Drawing.Color.GhostWhite;
+            this.panelUsuarioRegistro.Controls.Add(this.txtUsuarioRegistro);
+            this.panelUsuarioRegistro.Controls.Add(this.pictureBox5);
+            this.panelUsuarioRegistro.Location = new System.Drawing.Point(0, 274);
+            this.panelUsuarioRegistro.Name = "panelUsuarioRegistro";
+            this.panelUsuarioRegistro.Size = new System.Drawing.Size(449, 54);
+            this.panelUsuarioRegistro.TabIndex = 18;
+            // 
+            // txtUsuarioRegistro
+            // 
+            this.txtUsuarioRegistro.BackColor = System.Drawing.Color.GhostWhite;
+            this.txtUsuarioRegistro.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtUsuarioRegistro.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsuarioRegistro.Location = new System.Drawing.Point(79, 15);
+            this.txtUsuarioRegistro.Name = "txtUsuarioRegistro";
+            this.txtUsuarioRegistro.Size = new System.Drawing.Size(359, 22);
+            this.txtUsuarioRegistro.TabIndex = 2;
+            this.txtUsuarioRegistro.UseSystemPasswordChar = true;
+            this.txtUsuarioRegistro.Click += new System.EventHandler(this.txtUsuarioRegistro_Click);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::GUI.Properties.Resources.UserIcon;
+            this.pictureBox5.Location = new System.Drawing.Point(12, 0);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(57, 54);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 0;
+            this.pictureBox5.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(8, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(125, 25);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Crear cuenta";
+            // 
+            // panel1erNombre
+            // 
+            this.panel1erNombre.BackColor = System.Drawing.Color.White;
+            this.panel1erNombre.Controls.Add(this.txt1erNombre);
+            this.panel1erNombre.Controls.Add(this.pictureBox4);
+            this.panel1erNombre.Location = new System.Drawing.Point(0, 31);
+            this.panel1erNombre.Name = "panel1erNombre";
+            this.panel1erNombre.Size = new System.Drawing.Size(449, 54);
+            this.panel1erNombre.TabIndex = 17;
+            // 
+            // txt1erNombre
+            // 
+            this.txt1erNombre.BackColor = System.Drawing.Color.White;
+            this.txt1erNombre.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt1erNombre.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt1erNombre.Location = new System.Drawing.Point(79, 16);
+            this.txt1erNombre.Name = "txt1erNombre";
+            this.txt1erNombre.Size = new System.Drawing.Size(359, 22);
+            this.txt1erNombre.TabIndex = 1;
+            this.txt1erNombre.Click += new System.EventHandler(this.txtNombre_Click);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::GUI.Properties.Resources._1stName;
+            this.pictureBox4.Location = new System.Drawing.Point(12, 0);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(57, 54);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 0;
+            this.pictureBox4.TabStop = false;
+            // 
             // panelIzquierdo
             // 
             this.panelIzquierdo.BackColor = System.Drawing.Color.Transparent;
@@ -270,22 +550,43 @@
             this.BackColor = System.Drawing.Color.GhostWhite;
             this.ClientSize = new System.Drawing.Size(750, 530);
             this.ControlBox = false;
+            this.Controls.Add(this.panelRegistrarse);
             this.Controls.Add(this.btnSalir);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelIniciarSesion);
             this.Controls.Add(this.panelIzquierdo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MinimizeBox = false;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.panelIniciarSesion.ResumeLayout(false);
+            this.panelIniciarSesion.PerformLayout();
             this.panelContraseña.ResumeLayout(false);
             this.panelContraseña.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panelUsuario.ResumeLayout(false);
             this.panelUsuario.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panelRegistrarse.ResumeLayout(false);
+            this.panelRegistrarse.PerformLayout();
+            this.panel2doApellido.ResumeLayout(false);
+            this.panel2doApellido.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            this.panel1erApellido.ResumeLayout(false);
+            this.panel1erApellido.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            this.panel2doNombre.ResumeLayout(false);
+            this.panel2doNombre.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            this.panelContraseñaRegistro.ResumeLayout(false);
+            this.panelContraseñaRegistro.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            this.panelUsuarioRegistro.ResumeLayout(false);
+            this.panelUsuarioRegistro.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            this.panel1erNombre.ResumeLayout(false);
+            this.panel1erNombre.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panelIzquierdo.ResumeLayout(false);
             this.panelIzquierdo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -303,7 +604,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelIniciarSesion;
         private System.Windows.Forms.Panel panelUsuario;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panelContraseña;
@@ -313,6 +614,28 @@
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.Button btnRegistrarse;
         private System.Windows.Forms.Button btnEntrar;
+        private System.Windows.Forms.Panel panelRegistrarse;
+        private System.Windows.Forms.Button btnIniciarSesion;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel panelUsuarioRegistro;
+        private System.Windows.Forms.TextBox txtUsuarioRegistro;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Panel panel1erNombre;
+        private System.Windows.Forms.TextBox txt1erNombre;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panelContraseñaRegistro;
+        private System.Windows.Forms.TextBox txtContraseñaRegistro;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.Panel panel2doApellido;
+        private System.Windows.Forms.TextBox txt2doApellido;
+        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.Panel panel1erApellido;
+        private System.Windows.Forms.TextBox txt1erApellido;
+        private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.Panel panel2doNombre;
+        private System.Windows.Forms.TextBox txt2doNombre;
+        private System.Windows.Forms.PictureBox pictureBox7;
     }
 }
 

@@ -91,5 +91,20 @@
   <ItemGroup>
     <None Include="Resources\PsswrdIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NameIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1stName.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2stName.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1stSurname.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2stSurname.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
