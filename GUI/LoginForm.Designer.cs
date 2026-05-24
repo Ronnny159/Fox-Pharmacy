@@ -53,7 +53,7 @@
             this.txtContraseñaRegistro = new System.Windows.Forms.TextBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.btnIniciarSesion = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnCrearCuenta = new System.Windows.Forms.Button();
             this.panelUsuarioRegistro = new System.Windows.Forms.Panel();
             this.txtUsuarioRegistro = new System.Windows.Forms.TextBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
@@ -107,6 +107,7 @@
             // 
             // panelIniciarSesion
             // 
+            this.panelIniciarSesion.Controls.Add(this.panelRegistrarse);
             this.panelIniciarSesion.Controls.Add(this.btnRegistrarse);
             this.panelIniciarSesion.Controls.Add(this.btnEntrar);
             this.panelIniciarSesion.Controls.Add(this.panelContraseña);
@@ -144,6 +145,7 @@
             this.btnEntrar.TabIndex = 16;
             this.btnEntrar.Text = "Entrar";
             this.btnEntrar.UseVisualStyleBackColor = false;
+            this.btnEntrar.Click += new System.EventHandler(this.btnEntrar_Click);
             // 
             // panelContraseña
             // 
@@ -226,11 +228,11 @@
             this.panelRegistrarse.Controls.Add(this.panel2doNombre);
             this.panelRegistrarse.Controls.Add(this.panelContraseñaRegistro);
             this.panelRegistrarse.Controls.Add(this.btnIniciarSesion);
-            this.panelRegistrarse.Controls.Add(this.button2);
+            this.panelRegistrarse.Controls.Add(this.btnCrearCuenta);
             this.panelRegistrarse.Controls.Add(this.panelUsuarioRegistro);
             this.panelRegistrarse.Controls.Add(this.label5);
             this.panelRegistrarse.Controls.Add(this.panel1erNombre);
-            this.panelRegistrarse.Location = new System.Drawing.Point(301, 42);
+            this.panelRegistrarse.Location = new System.Drawing.Point(0, -1);
             this.panelRegistrarse.Name = "panelRegistrarse";
             this.panelRegistrarse.Size = new System.Drawing.Size(450, 488);
             this.panelRegistrarse.TabIndex = 20;
@@ -376,18 +378,19 @@
             this.btnIniciarSesion.UseVisualStyleBackColor = false;
             this.btnIniciarSesion.Click += new System.EventHandler(this.btnIniciarSesion_Click);
             // 
-            // button2
+            // btnCrearCuenta
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(62, 411);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(148, 35);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "Registrarse";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnCrearCuenta.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnCrearCuenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCrearCuenta.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCrearCuenta.ForeColor = System.Drawing.Color.White;
+            this.btnCrearCuenta.Location = new System.Drawing.Point(62, 411);
+            this.btnCrearCuenta.Name = "btnCrearCuenta";
+            this.btnCrearCuenta.Size = new System.Drawing.Size(148, 35);
+            this.btnCrearCuenta.TabIndex = 16;
+            this.btnCrearCuenta.Text = "Registrarse";
+            this.btnCrearCuenta.UseVisualStyleBackColor = false;
+            this.btnCrearCuenta.Click += new System.EventHandler(this.btnCrearCuenta_Click);
             // 
             // panelUsuarioRegistro
             // 
@@ -550,7 +553,6 @@
             this.BackColor = System.Drawing.Color.GhostWhite;
             this.ClientSize = new System.Drawing.Size(750, 530);
             this.ControlBox = false;
-            this.Controls.Add(this.panelRegistrarse);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.panelIniciarSesion);
             this.Controls.Add(this.panelIzquierdo);
@@ -616,7 +618,7 @@
         private System.Windows.Forms.Button btnEntrar;
         private System.Windows.Forms.Panel panelRegistrarse;
         private System.Windows.Forms.Button btnIniciarSesion;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCrearCuenta;
         private System.Windows.Forms.Panel panelUsuarioRegistro;
         private System.Windows.Forms.TextBox txtUsuarioRegistro;
         private System.Windows.Forms.PictureBox pictureBox4;

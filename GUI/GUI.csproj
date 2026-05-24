@@ -33,7 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,16 +48,62 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoriasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CategoriasForm.Designer.cs">
+      <DependentUpon>CategoriasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Colores.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MovimientosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MovimientosForm.Designer.cs">
+      <DependentUpon>MovimientosForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductosForm.Designer.cs">
+      <DependentUpon>ProductosForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProveedoresForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProveedoresForm.Designer.cs">
+      <DependentUpon>ProveedoresForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportesForm.Designer.cs">
+      <DependentUpon>ReportesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsuariosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsuariosForm.Designer.cs">
+      <DependentUpon>UsuariosForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -105,6 +153,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\2stSurname.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProductsIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CategoryIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SuppliersIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TransactionsIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UsersIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ReportsIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ReturnIcon1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

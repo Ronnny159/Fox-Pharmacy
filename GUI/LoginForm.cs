@@ -155,5 +155,24 @@ namespace GUI
             txtContraseñaRegistro.BackColor = Color.White;
             panelContraseñaRegistro.BackColor = Color.White;
         }
+
+        private void btnEntrar_Click(object sender, EventArgs e)
+        {
+            AbrirMainForm(this);
+        }
+
+        private void btnCrearCuenta_Click(object sender, EventArgs e)
+        {
+            AbrirMainForm(this);
+        }
+
+        private void AbrirMainForm(Form form)
+        {
+            MainForm main = new MainForm();
+
+            main.Show();
+
+            this.Hide();
+        }
     }
 }
