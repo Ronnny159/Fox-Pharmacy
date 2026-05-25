@@ -61,3 +61,16 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+###############################################################################
+# Configuración para que GitHub detecte GUI como lenguaje principal
+###############################################################################
+
+# Marcar BLL, DAL, ENTITY y SQL como documentación/generados 
+# para que no cuenten en las estadísticas de lenguaje
+BLL/** linguist-documentation=true
+DAL/** linguist-documentation=true
+ENTITY/** linguist-documentation=true
+SQL/** linguist-documentation=true
+
+# GUI será la única que cuente para las estadísticas
+GUI/** linguist-detectable=true
