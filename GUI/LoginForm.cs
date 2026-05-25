@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BLL;
+using DAL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +14,14 @@ namespace GUI
 {
     public partial class LoginForm : Form
     {
+        private readonly IUsuarioRepository _usuarioRepository;
+        public string usuariosEntry;
+        public string contraseñaEntry;
+
         public LoginForm()
         {
             InitializeComponent();
-
+           
         }
 
 
@@ -158,6 +164,10 @@ namespace GUI
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
+            
+            usuariosEntry = txtUsuario.Text.Trim();
+            contraseñaEntry = txtContraseña.Text.Trim();
+
             AbrirMainForm(this);
         }
 
