@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class MovimientosForm
+    partial class InventarioForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // MovimientosForm
+            // CategoriasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "MovimientosForm";
-            this.Text = "MovimientosForm";
+            this.ClientSize = new System.Drawing.Size(737, 407);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Name = "CategoriasForm";
+            this.Text = "CategoriasForm";
             this.ResumeLayout(false);
 
         }

@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class UsuariosForm
+    partial class ClientesForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,16 @@
         {
             this.SuspendLayout();
             // 
-            // UsuariosForm
+            // ProveedoresForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(737, 407);
-            this.Name = "UsuariosForm";
-            this.Text = "UsuarioForm";
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Name = "ProveedoresForm";
+            this.Text = "ProveedoresForm";
             this.ResumeLayout(false);
 
         }

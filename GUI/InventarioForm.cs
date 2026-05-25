@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class MovimientosForm : Form
+    public partial class InventarioForm : Form
     {
-        public MovimientosForm()
+        public InventarioForm()
         {
             InitializeComponent();
             CargarColores();

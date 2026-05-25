@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class UsuariosForm
+    partial class AlertasForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // UsuariosForm
+            // AlertasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(737, 407);
-            this.Name = "UsuariosForm";
-            this.Text = "UsuarioForm";
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Name = "AlertasForm";
+            this.Text = "AlertasForm";
+            this.Load += new System.EventHandler(this.AlertasForm_Load);
             this.ResumeLayout(false);
 
         }

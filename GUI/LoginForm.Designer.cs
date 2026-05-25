@@ -30,37 +30,37 @@
         {
             this.btnSalir = new System.Windows.Forms.Button();
             this.panelIniciarSesion = new System.Windows.Forms.Panel();
-            this.btnRegistrarse = new System.Windows.Forms.Button();
-            this.btnEntrar = new System.Windows.Forms.Button();
-            this.panelContraseña = new System.Windows.Forms.Panel();
-            this.txtContraseña = new System.Windows.Forms.TextBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.panelUsuario = new System.Windows.Forms.Panel();
-            this.txtUsuario = new System.Windows.Forms.TextBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.panelRegistrarse = new System.Windows.Forms.Panel();
             this.panel2doApellido = new System.Windows.Forms.Panel();
             this.txt2doApellido = new System.Windows.Forms.TextBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.panel1erApellido = new System.Windows.Forms.Panel();
             this.txt1erApellido = new System.Windows.Forms.TextBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.panel2doNombre = new System.Windows.Forms.Panel();
             this.txt2doNombre = new System.Windows.Forms.TextBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.panelContraseñaRegistro = new System.Windows.Forms.Panel();
             this.txtContraseñaRegistro = new System.Windows.Forms.TextBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.btnIniciarSesion = new System.Windows.Forms.Button();
             this.btnCrearCuenta = new System.Windows.Forms.Button();
             this.panelUsuarioRegistro = new System.Windows.Forms.Panel();
             this.txtUsuarioRegistro = new System.Windows.Forms.TextBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1erNombre = new System.Windows.Forms.Panel();
             this.txt1erNombre = new System.Windows.Forms.TextBox();
+            this.btnRegistrarse = new System.Windows.Forms.Button();
+            this.btnEntrar = new System.Windows.Forms.Button();
+            this.panelContraseña = new System.Windows.Forms.Panel();
+            this.txtContraseña = new System.Windows.Forms.TextBox();
+            this.panelUsuario = new System.Windows.Forms.Panel();
+            this.txtUsuario = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panelIzquierdo = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -69,23 +69,23 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelIniciarSesion.SuspendLayout();
-            this.panelContraseña.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            this.panelUsuario.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelRegistrarse.SuspendLayout();
             this.panel2doApellido.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.panel1erApellido.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.panel2doNombre.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.panelContraseñaRegistro.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.panelUsuarioRegistro.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel1erNombre.SuspendLayout();
+            this.panelContraseña.SuspendLayout();
+            this.panelUsuario.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelIzquierdo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -117,109 +117,6 @@
             this.panelIniciarSesion.Name = "panelIniciarSesion";
             this.panelIniciarSesion.Size = new System.Drawing.Size(450, 488);
             this.panelIniciarSesion.TabIndex = 15;
-            // 
-            // btnRegistrarse
-            // 
-            this.btnRegistrarse.BackColor = System.Drawing.Color.Transparent;
-            this.btnRegistrarse.FlatAppearance.BorderSize = 0;
-            this.btnRegistrarse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrarse.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistrarse.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnRegistrarse.Location = new System.Drawing.Point(259, 289);
-            this.btnRegistrarse.Name = "btnRegistrarse";
-            this.btnRegistrarse.Size = new System.Drawing.Size(148, 35);
-            this.btnRegistrarse.TabIndex = 19;
-            this.btnRegistrarse.Text = "No tienes cuenta?";
-            this.btnRegistrarse.UseVisualStyleBackColor = false;
-            this.btnRegistrarse.Click += new System.EventHandler(this.btnRegistrarse_Click);
-            // 
-            // btnEntrar
-            // 
-            this.btnEntrar.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnEntrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEntrar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEntrar.ForeColor = System.Drawing.Color.White;
-            this.btnEntrar.Location = new System.Drawing.Point(62, 289);
-            this.btnEntrar.Name = "btnEntrar";
-            this.btnEntrar.Size = new System.Drawing.Size(148, 35);
-            this.btnEntrar.TabIndex = 16;
-            this.btnEntrar.Text = "Entrar";
-            this.btnEntrar.UseVisualStyleBackColor = false;
-            this.btnEntrar.Click += new System.EventHandler(this.btnEntrar_Click);
-            // 
-            // panelContraseña
-            // 
-            this.panelContraseña.Controls.Add(this.txtContraseña);
-            this.panelContraseña.Controls.Add(this.pictureBox3);
-            this.panelContraseña.Location = new System.Drawing.Point(0, 195);
-            this.panelContraseña.Name = "panelContraseña";
-            this.panelContraseña.Size = new System.Drawing.Size(449, 54);
-            this.panelContraseña.TabIndex = 18;
-            // 
-            // txtContraseña
-            // 
-            this.txtContraseña.BackColor = System.Drawing.Color.GhostWhite;
-            this.txtContraseña.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtContraseña.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtContraseña.Location = new System.Drawing.Point(79, 15);
-            this.txtContraseña.Name = "txtContraseña";
-            this.txtContraseña.Size = new System.Drawing.Size(359, 22);
-            this.txtContraseña.TabIndex = 2;
-            this.txtContraseña.UseSystemPasswordChar = true;
-            this.txtContraseña.Click += new System.EventHandler(this.txtContraseña_Click);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::GUI.Properties.Resources.PsswrdIcon;
-            this.pictureBox3.Location = new System.Drawing.Point(13, 0);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(57, 54);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 0;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox3_MouseDown);
-            this.pictureBox3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox3_MouseUp);
-            // 
-            // panelUsuario
-            // 
-            this.panelUsuario.BackColor = System.Drawing.Color.White;
-            this.panelUsuario.Controls.Add(this.txtUsuario);
-            this.panelUsuario.Controls.Add(this.pictureBox2);
-            this.panelUsuario.Location = new System.Drawing.Point(0, 135);
-            this.panelUsuario.Name = "panelUsuario";
-            this.panelUsuario.Size = new System.Drawing.Size(449, 54);
-            this.panelUsuario.TabIndex = 17;
-            // 
-            // txtUsuario
-            // 
-            this.txtUsuario.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtUsuario.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsuario.Location = new System.Drawing.Point(79, 16);
-            this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(359, 22);
-            this.txtUsuario.TabIndex = 1;
-            this.txtUsuario.Click += new System.EventHandler(this.txtUsuario_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::GUI.Properties.Resources.UserIcon;
-            this.pictureBox2.Location = new System.Drawing.Point(13, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(57, 54);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(57, 88);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(130, 25);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Iniciar Sesión";
             // 
             // panelRegistrarse
             // 
@@ -259,16 +156,6 @@
             this.txt2doApellido.TabIndex = 1;
             this.txt2doApellido.Click += new System.EventHandler(this.txt2doApellido_Click);
             // 
-            // pictureBox9
-            // 
-            this.pictureBox9.Image = global::GUI.Properties.Resources._2stSurname;
-            this.pictureBox9.Location = new System.Drawing.Point(12, 0);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(57, 54);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox9.TabIndex = 0;
-            this.pictureBox9.TabStop = false;
-            // 
             // panel1erApellido
             // 
             this.panel1erApellido.BackColor = System.Drawing.Color.GhostWhite;
@@ -289,16 +176,6 @@
             this.txt1erApellido.Size = new System.Drawing.Size(359, 22);
             this.txt1erApellido.TabIndex = 1;
             this.txt1erApellido.Click += new System.EventHandler(this.txt1erApellido_Click);
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.Image = global::GUI.Properties.Resources._1stSurname;
-            this.pictureBox8.Location = new System.Drawing.Point(12, 0);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(57, 54);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox8.TabIndex = 0;
-            this.pictureBox8.TabStop = false;
             // 
             // panel2doNombre
             // 
@@ -321,16 +198,6 @@
             this.txt2doNombre.TabIndex = 1;
             this.txt2doNombre.Click += new System.EventHandler(this.txt2doNombre_Click);
             // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Image = global::GUI.Properties.Resources._2stName;
-            this.pictureBox7.Location = new System.Drawing.Point(12, 0);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(57, 54);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox7.TabIndex = 0;
-            this.pictureBox7.TabStop = false;
-            // 
             // panelContraseñaRegistro
             // 
             this.panelContraseñaRegistro.BackColor = System.Drawing.Color.GhostWhite;
@@ -352,16 +219,6 @@
             this.txtContraseñaRegistro.TabIndex = 2;
             this.txtContraseñaRegistro.UseSystemPasswordChar = true;
             this.txtContraseñaRegistro.Click += new System.EventHandler(this.txtContraseñaRegistro_Click);
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Image = global::GUI.Properties.Resources.PsswrdIcon;
-            this.pictureBox6.Location = new System.Drawing.Point(13, 0);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(57, 54);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox6.TabIndex = 0;
-            this.pictureBox6.TabStop = false;
             // 
             // btnIniciarSesion
             // 
@@ -414,16 +271,6 @@
             this.txtUsuarioRegistro.UseSystemPasswordChar = true;
             this.txtUsuarioRegistro.Click += new System.EventHandler(this.txtUsuarioRegistro_Click);
             // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::GUI.Properties.Resources.UserIcon;
-            this.pictureBox5.Location = new System.Drawing.Point(12, 0);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(57, 54);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 0;
-            this.pictureBox5.TabStop = false;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -456,6 +303,138 @@
             this.txt1erNombre.TabIndex = 1;
             this.txt1erNombre.Click += new System.EventHandler(this.txtNombre_Click);
             // 
+            // btnRegistrarse
+            // 
+            this.btnRegistrarse.BackColor = System.Drawing.Color.Transparent;
+            this.btnRegistrarse.FlatAppearance.BorderSize = 0;
+            this.btnRegistrarse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistrarse.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistrarse.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnRegistrarse.Location = new System.Drawing.Point(259, 289);
+            this.btnRegistrarse.Name = "btnRegistrarse";
+            this.btnRegistrarse.Size = new System.Drawing.Size(148, 35);
+            this.btnRegistrarse.TabIndex = 19;
+            this.btnRegistrarse.Text = "No tienes cuenta?";
+            this.btnRegistrarse.UseVisualStyleBackColor = false;
+            this.btnRegistrarse.Click += new System.EventHandler(this.btnRegistrarse_Click);
+            // 
+            // btnEntrar
+            // 
+            this.btnEntrar.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnEntrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEntrar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEntrar.ForeColor = System.Drawing.Color.White;
+            this.btnEntrar.Location = new System.Drawing.Point(62, 289);
+            this.btnEntrar.Name = "btnEntrar";
+            this.btnEntrar.Size = new System.Drawing.Size(148, 35);
+            this.btnEntrar.TabIndex = 16;
+            this.btnEntrar.Text = "Entrar";
+            this.btnEntrar.UseVisualStyleBackColor = false;
+            this.btnEntrar.Click += new System.EventHandler(this.btnEntrar_Click);
+            // 
+            // panelContraseña
+            // 
+            this.panelContraseña.Controls.Add(this.txtContraseña);
+            this.panelContraseña.Controls.Add(this.pictureBox3);
+            this.panelContraseña.Location = new System.Drawing.Point(0, 195);
+            this.panelContraseña.Name = "panelContraseña";
+            this.panelContraseña.Size = new System.Drawing.Size(449, 54);
+            this.panelContraseña.TabIndex = 18;
+            // 
+            // txtContraseña
+            // 
+            this.txtContraseña.BackColor = System.Drawing.Color.GhostWhite;
+            this.txtContraseña.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtContraseña.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContraseña.Location = new System.Drawing.Point(79, 15);
+            this.txtContraseña.Name = "txtContraseña";
+            this.txtContraseña.Size = new System.Drawing.Size(359, 22);
+            this.txtContraseña.TabIndex = 2;
+            this.txtContraseña.UseSystemPasswordChar = true;
+            this.txtContraseña.Click += new System.EventHandler(this.txtContraseña_Click);
+            // 
+            // panelUsuario
+            // 
+            this.panelUsuario.BackColor = System.Drawing.Color.White;
+            this.panelUsuario.Controls.Add(this.txtUsuario);
+            this.panelUsuario.Controls.Add(this.pictureBox2);
+            this.panelUsuario.Location = new System.Drawing.Point(0, 135);
+            this.panelUsuario.Name = "panelUsuario";
+            this.panelUsuario.Size = new System.Drawing.Size(449, 54);
+            this.panelUsuario.TabIndex = 17;
+            // 
+            // txtUsuario
+            // 
+            this.txtUsuario.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtUsuario.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsuario.Location = new System.Drawing.Point(79, 16);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.Size = new System.Drawing.Size(359, 22);
+            this.txtUsuario.TabIndex = 1;
+            this.txtUsuario.Click += new System.EventHandler(this.txtUsuario_Click);
+            this.txtUsuario.TextChanged += new System.EventHandler(this.txtUsuario_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(57, 88);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(130, 25);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Iniciar Sesión";
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = global::GUI.Properties.Resources._2stSurname;
+            this.pictureBox9.Location = new System.Drawing.Point(12, 0);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(57, 54);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox9.TabIndex = 0;
+            this.pictureBox9.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = global::GUI.Properties.Resources._1stSurname;
+            this.pictureBox8.Location = new System.Drawing.Point(12, 0);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(57, 54);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox8.TabIndex = 0;
+            this.pictureBox8.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::GUI.Properties.Resources._2stName;
+            this.pictureBox7.Location = new System.Drawing.Point(12, 0);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(57, 54);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox7.TabIndex = 0;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::GUI.Properties.Resources.PsswrdIcon;
+            this.pictureBox6.Location = new System.Drawing.Point(13, 0);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(57, 54);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 0;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::GUI.Properties.Resources.UserIcon;
+            this.pictureBox5.Location = new System.Drawing.Point(12, 0);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(57, 54);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 0;
+            this.pictureBox5.TabStop = false;
+            // 
             // pictureBox4
             // 
             this.pictureBox4.Image = global::GUI.Properties.Resources._1stName;
@@ -465,6 +444,28 @@
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 0;
             this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::GUI.Properties.Resources.PsswrdIcon;
+            this.pictureBox3.Location = new System.Drawing.Point(13, 0);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(57, 54);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 0;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox3_MouseDown);
+            this.pictureBox3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox3_MouseUp);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::GUI.Properties.Resources.UserIcon;
+            this.pictureBox2.Location = new System.Drawing.Point(13, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(57, 54);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
             // 
             // panelIzquierdo
             // 
@@ -563,32 +564,32 @@
             this.Text = "Login";
             this.panelIniciarSesion.ResumeLayout(false);
             this.panelIniciarSesion.PerformLayout();
-            this.panelContraseña.ResumeLayout(false);
-            this.panelContraseña.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            this.panelUsuario.ResumeLayout(false);
-            this.panelUsuario.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panelRegistrarse.ResumeLayout(false);
             this.panelRegistrarse.PerformLayout();
             this.panel2doApellido.ResumeLayout(false);
             this.panel2doApellido.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.panel1erApellido.ResumeLayout(false);
             this.panel1erApellido.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.panel2doNombre.ResumeLayout(false);
             this.panel2doNombre.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.panelContraseñaRegistro.ResumeLayout(false);
             this.panelContraseñaRegistro.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.panelUsuarioRegistro.ResumeLayout(false);
             this.panelUsuarioRegistro.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel1erNombre.ResumeLayout(false);
             this.panel1erNombre.PerformLayout();
+            this.panelContraseña.ResumeLayout(false);
+            this.panelContraseña.PerformLayout();
+            this.panelUsuario.ResumeLayout(false);
+            this.panelUsuario.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panelIzquierdo.ResumeLayout(false);
             this.panelIzquierdo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

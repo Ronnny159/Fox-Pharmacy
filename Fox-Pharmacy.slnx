@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="BLL/BLL.csproj" />
   <Project Path="DAL/DAL.csproj" />
   <Project Path="ENTITY/Entity.csproj" />
   <Project Path="GUI/GUI.csproj" Id="c0e69eb2-b838-4c39-94bb-996f9f906965" />

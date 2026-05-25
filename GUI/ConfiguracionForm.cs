@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class ProductosForm : Form
+    public partial class ConfiguracionForm : Form
     {
-        public ProductosForm()
+        public ConfiguracionForm()
         {
             InitializeComponent();
             CargarColores();
@@ -30,14 +30,6 @@ namespace GUI
                     btn.FlatAppearance.BorderColor = Colores.ColorSecundario;
                 }
             }
-
-            btnAgregarProducto.BackColor = Colores.ColorSecundario;
-            btnDetallesProducto.BackColor = Colores.ColorSecundario;
-            btnEliminarProductos.BackColor = Colores.ColorSecundario;
-            btnBuscarPorCodigo.BackColor = Colores.ColorSecundario;
-            lblAgregarProductos.ForeColor = Colores.ColorPrimario;
-            lblTituloTabla.ForeColor = Colores.ColorPrimario;
-            lblBuscarPorId.ForeColor = Colores.ColorPrimario;
             // Aqui asignale a cada cosa que le vayas a cambiar el color, el color que quieras, por ejemplo:
             // lable5.ForeColor = Colores.ColorPrimario;
             //

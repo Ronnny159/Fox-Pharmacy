@@ -28,7 +28,7 @@ namespace GUI
             this.ControlBox = false;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
-
+        //Metodos y dlls
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
 
@@ -97,27 +97,38 @@ namespace GUI
             this.panelInicio.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-            lblTitulo.Text = childForm.Text;
+            lblTitulo.Text = childForm.Text.Substring(0, childForm.Text.Length - 4).ToUpper();
         }
 
+        private void Reset()
+        {
+            DisableButton();
+            lblTitulo.Text = "INICIO";
+            panelTitulo.BackColor = Color.FromArgb(0, 120, 215);
+            panelLogo.BackColor = Color.FromArgb(39, 39, 58);
+            currentButton = null;
+            btnCerrarFormHijo.Visible = false;
+        }
+
+        //buttons para forms
         private void btnProductos_Click(object sender, EventArgs e)
         {
             AbrirFormHijo(new GUI.ProductosForm(), sender);
         }
 
-        private void btnCategorias_Click(object sender, EventArgs e)
+        private void btnInventario_Click(object sender, EventArgs e)
         {
-            AbrirFormHijo(new GUI.CategoriasForm(), sender);
+            AbrirFormHijo(new GUI.InventarioForm(), sender);
         }
 
-        private void btnProveedores_Click(object sender, EventArgs e)
+        private void btnClientes_Click(object sender, EventArgs e)
         {
-            AbrirFormHijo(new GUI.ProveedoresForm(), sender);
+            AbrirFormHijo(new GUI.ClientesForm(), sender);
         }
 
-        private void btnMovimientos_Click(object sender, EventArgs e)
+        private void btnVentas_Click(object sender, EventArgs e)
         {
-            AbrirFormHijo(new GUI.MovimientosForm(), sender);
+            AbrirFormHijo(new GUI.VentasForm(), sender);
         }
 
         private void btnUsuarios_Click(object sender, EventArgs e)
@@ -129,22 +140,23 @@ namespace GUI
         {
             AbrirFormHijo(new GUI.ReportesForm(), sender);
         }
+        private void btnAlertas_Click(object sender, EventArgs e)
+        {
+            AbrirFormHijo(new GUI.AlertasForm(), sender);
+        }
+
+        //Eventos
+
+        private void btnConfiguracion_Click(object sender, EventArgs e)
+        {
+            AbrirFormHijo(new GUI.ConfiguracionForm(), sender);
+        }
 
         private void btnCerrarFormHijo_Click(object sender, EventArgs e)
         {
             if(activeForm!=null)
                 activeForm.Close();
             Reset();
-        }
-
-        private void Reset()
-        {
-            DisableButton();
-            lblTitulo.Text = "INICIO";
-            panelTitulo.BackColor = Color.FromArgb(0, 120, 215);
-            panelLogo.BackColor = Color.FromArgb(39, 39, 58);
-            currentButton = null;
-            btnCerrarFormHijo.Visible = false;
         }
 
         private void panelTitulo_MouseDown(object sender, MouseEventArgs e)
@@ -170,5 +182,6 @@ namespace GUI
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
     }
 }

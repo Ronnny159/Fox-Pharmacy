@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class CategoriasForm : Form
+    public partial class AlertasForm : Form
     {
-        public CategoriasForm()
+        public AlertasForm()
         {
             InitializeComponent();
+        }
+
+        private void AlertasForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

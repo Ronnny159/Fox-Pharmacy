@@ -174,5 +174,10 @@ namespace GUI
 
             this.Hide();
         }
+
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
