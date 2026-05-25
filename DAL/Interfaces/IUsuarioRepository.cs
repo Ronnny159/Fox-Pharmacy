@@ -11,7 +11,7 @@ namespace DAL.Interfaces;
 /// </summary>
 public interface IUsuarioRepository
 {
-    Usuario? ObtenerPorCredencialesAsync(string nombreUsuario, string hashContrasena);
+    Task<Usuario?> ObtenerPorCredencialesAsync(string nombreUsuario, string hashContrasena);
     Usuario? ObtenerPorId(int id);
     Usuario? ObtenerPorDocumento(string documento);
     IEnumerable<Usuario> ObtenerTodos();

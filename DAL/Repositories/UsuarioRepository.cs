@@ -25,6 +25,28 @@ public class UsuarioRepository : BaseRepository, IUsuarioRepository
         }, MapearUsuario);
     }
 
+    /// <summary>
+    /// Versión asíncrona de ObtenerPorCredenciales.
+    /// Ideal para llamadas desde servicios que requieren no bloquear el hilo principal.
+    /// </summary>
+    public async Task<Usuario?> ObtenerPorCredencialesAsync(string nombreUsuario, string hashContrasena)
+    {
+        const string sql = @"
+            SELECT ID, NOMBRE_USUARIO, HASH_CONTRASENA, NOMBRE_COMPLETO, ROL, DOCUMENTO_IDENTIDAD,
+                   ACTIVO, FECHA_CREACION
+            FROM USUARIO 
+            WHERE NOMBRE_USUARIO = :user AND HASH_CONTRASENA = :hash AND ACTIVO = 1";
+
+        return await Task.Run(() =>
+        {
+            return EjecutarConsulta(sql, cmd =>
+            {
+                cmd.Parameters.Add("user", OracleDbType.Varchar2).Value = nombreUsuario;
+                cmd.Parameters.Add("hash", OracleDbType.Varchar2).Value = hashContrasena;
+            }, MapearUsuario);
+        });
+    }
+
     public Usuario? ObtenerPorId(int id)
     {
         const string sql = @"
@@ -109,4 +131,4 @@ public class UsuarioRepository : BaseRepository, IUsuarioRepository
             FechaCreacion = reader.GetDateTime(reader.GetOrdinal("FECHA_CREACION"))
         };
     }
-}
+}  
