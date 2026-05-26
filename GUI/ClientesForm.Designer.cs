@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
-            // ProveedoresForm
+            // ClientesForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(737, 407);
-            this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Name = "ProveedoresForm";
-            this.Text = "ProveedoresForm";
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.SystemColors.ControlLightLight;
+            ClientSize = new System.Drawing.Size(860, 470);
+            ForeColor = System.Drawing.SystemColors.ControlText;
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "ClientesForm";
+            Text = "ClientesForm";
+            ResumeLayout(false);
 
         }
 

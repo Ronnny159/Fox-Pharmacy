@@ -15,8 +15,6 @@ namespace GUI
     public partial class LoginForm : Form
     {
         private readonly IUsuarioRepository _usuarioRepository;
-        public string usuariosEntry;
-        public string contraseñaEntry;
 
         public LoginForm()
         {
@@ -164,10 +162,6 @@ namespace GUI
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-            
-            usuariosEntry = txtUsuario.Text.Trim();
-            contraseñaEntry = txtContraseña.Text.Trim();
-
             AbrirMainForm(this);
         }
 

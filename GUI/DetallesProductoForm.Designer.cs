@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class VentasForm
+    partial class DetallesProductoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,19 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            SuspendLayout();
-            // 
-            // VentasForm
-            // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.SystemColors.ControlLightLight;
-            ClientSize = new System.Drawing.Size(860, 470);
-            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            Name = "VentasForm";
-            Text = "VentasForm";
-            ResumeLayout(false);
-
+            this.components = new System.ComponentModel.Container();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "DetallesProductoForm";
         }
 
         #endregion

@@ -88,6 +88,7 @@ namespace GUI
             {
                 activeForm.Close();
             }
+
             ActivateButton(senderBtn);
             activeForm = childForm;
             childForm.TopLevel = false;

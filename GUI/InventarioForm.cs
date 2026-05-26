@@ -30,6 +30,14 @@ namespace GUI
                     btn.FlatAppearance.BorderColor = Colores.ColorSecundario;
                 }
             }
+
+            lblRegistroLote.ForeColor = Colores.ColorSecundario;
+            lblExistencias.ForeColor = Colores.ColorSecundario;
+            lblVencimientos.ForeColor = Colores.ColorSecundario;
+            btnAgregarLote.BackColor = Colores.ColorPrimario;
+            btnBuscarLote.BackColor = Colores.ColorPrimario;
+            btnModificarLote.BackColor = Colores.ColorPrimario;
+            btnEliminarLote.BackColor = Colores.ColorPrimario;
             // Aqui asignale a cada cosa que le vayas a cambiar el color, el color que quieras, por ejemplo:
             // lable5.ForeColor = Colores.ColorPrimario;
             //
