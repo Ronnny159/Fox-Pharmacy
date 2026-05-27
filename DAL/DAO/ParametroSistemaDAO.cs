@@ -12,7 +12,7 @@ public class ParametroSistemaDAO : BaseDAO, IParametroSistemaDAO
     public ParametroSistema? ObtenerPorClave(string clave)
     {
         ParametroSistema? resultado = null;
-        EjecutarCursor("SP_OBTENER_PARAMETRO_POR_CLAVE",
+        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_PARAMETRO",
             cmd => cmd.Parameters.Add("p_clave", OracleDbType.Varchar2).Value = clave,
             reader => { if (reader.Read()) resultado = MapearParametro(reader); });
         return resultado;
@@ -21,7 +21,7 @@ public class ParametroSistemaDAO : BaseDAO, IParametroSistemaDAO
     public List<ParametroSistema> ObtenerTodos()
     {
         var lista = new List<ParametroSistema>();
-        EjecutarCursor("SP_OBTENER_TODOS_PARAMETROS",
+        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_TODOS_PARAMETROS",
             cmd => { },
             reader => { while (reader.Read()) lista.Add(MapearParametro(reader)); });
         return lista;
@@ -29,7 +29,7 @@ public class ParametroSistemaDAO : BaseDAO, IParametroSistemaDAO
 
     public void Insertar(ParametroSistema parametro)
     {
-        EjecutarProcedimiento("SP_INSERTAR_PARAMETRO", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.INSERTAR_PARAMETRO", cmd =>
         {
             cmd.Parameters.Add("p_clave", OracleDbType.Varchar2).Value = parametro.Clave;
             cmd.Parameters.Add("p_valor", OracleDbType.Varchar2).Value = parametro.Valor;
@@ -39,8 +39,9 @@ public class ParametroSistemaDAO : BaseDAO, IParametroSistemaDAO
 
     public void Actualizar(ParametroSistema parametro)
     {
-        EjecutarProcedimiento("SP_ACTUALIZAR_DESCUENTO_GENERAL", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.ACTUALIZAR_PARAMETRO", cmd =>
         {
+            cmd.Parameters.Add("p_clave", OracleDbType.Varchar2).Value = parametro.Clave;
             cmd.Parameters.Add("p_nuevo_valor", OracleDbType.Varchar2).Value = parametro.Valor;
             cmd.Parameters.Add("p_usuario_id", OracleDbType.Int32).Value = 1;
             cmd.Parameters.Add("p_motivo", OracleDbType.Varchar2).Value = "Actualización desde sistema";

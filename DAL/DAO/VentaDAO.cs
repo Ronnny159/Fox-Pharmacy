@@ -17,7 +17,7 @@ public class VentaDAO : BaseDAO, IVentaDAO
 
         try
         {
-            using var cmdVenta = new OracleCommand("SP_CREAR_VENTA", conexion);
+            using var cmdVenta = new OracleCommand("PKG_PHARMASMART_VENTAS.CREAR_VENTA", conexion);
             cmdVenta.CommandType = CommandType.StoredProcedure;
             cmdVenta.Parameters.Add("p_usuario_id", OracleDbType.Int32).Value = venta.UsuarioId;
             cmdVenta.Parameters.Add("p_cliente_id", OracleDbType.Int32).Value = (object?)venta.ClienteId ?? DBNull.Value;
@@ -38,7 +38,7 @@ public class VentaDAO : BaseDAO, IVentaDAO
             foreach (var detalle in detalles)
             {
                 detalle.VentaId = venta.Id;
-                using var cmdDetalle = new OracleCommand("SP_INSERTAR_DETALLE_VENTA", conexion);
+                using var cmdDetalle = new OracleCommand("PKG_PHARMASMART_VENTAS.INSERTAR_DETALLE_VENTA", conexion);
                 cmdDetalle.CommandType = CommandType.StoredProcedure;
                 cmdDetalle.Parameters.Add("p_venta_id", OracleDbType.Int32).Value = detalle.VentaId;
                 cmdDetalle.Parameters.Add("p_lote_id", OracleDbType.Int32).Value = detalle.LoteId;
@@ -61,7 +61,7 @@ public class VentaDAO : BaseDAO, IVentaDAO
     public Venta? ObtenerPorId(int id)
     {
         Venta? resultado = null;
-        EjecutarCursor("SP_OBTENER_VENTA_POR_ID",
+        EjecutarCursor("PKG_PHARMASMART_VENTAS.OBTENER_VENTA_POR_ID",
             cmd => cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = id,
             reader => { if (reader.Read()) resultado = MapearVenta(reader); });
         return resultado;
@@ -70,7 +70,7 @@ public class VentaDAO : BaseDAO, IVentaDAO
     public Venta? ObtenerPorNumeroFactura(string numeroFactura)
     {
         Venta? resultado = null;
-        EjecutarCursor("SP_OBTENER_VENTA_POR_FACTURA",
+        EjecutarCursor("PKG_PHARMASMART_VENTAS.OBTENER_VENTA_POR_FACTURA",
             cmd => cmd.Parameters.Add("p_numero_factura", OracleDbType.Varchar2).Value = numeroFactura,
             reader => { if (reader.Read()) resultado = MapearVenta(reader); });
         return resultado;
@@ -79,7 +79,7 @@ public class VentaDAO : BaseDAO, IVentaDAO
     public List<Venta> ObtenerPorUsuario(int usuarioId)
     {
         var lista = new List<Venta>();
-        EjecutarCursor("SP_OBTENER_VENTAS_POR_USUARIO",
+        EjecutarCursor("PKG_PHARMASMART_VENTAS.OBTENER_VENTAS_POR_USUARIO",
             cmd => cmd.Parameters.Add("p_usuario_id", OracleDbType.Int32).Value = usuarioId,
             reader => { while (reader.Read()) lista.Add(MapearVenta(reader)); });
         return lista;
@@ -88,7 +88,7 @@ public class VentaDAO : BaseDAO, IVentaDAO
     public List<Venta> ObtenerPorRangoFechas(DateTime desde, DateTime hasta)
     {
         var lista = new List<Venta>();
-        EjecutarCursor("SP_OBTENER_VENTAS_POR_FECHAS",
+        EjecutarCursor("PKG_PHARMASMART_VENTAS.OBTENER_VENTAS_POR_FECHAS",
             cmd =>
             {
                 cmd.Parameters.Add("p_desde", OracleDbType.Date).Value = desde;
@@ -100,7 +100,7 @@ public class VentaDAO : BaseDAO, IVentaDAO
 
     public void AnularVenta(int ventaId, int usuarioId)
     {
-        EjecutarProcedimiento("SP_ANULAR_VENTA", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_VENTAS.ANULAR_VENTA", cmd =>
         {
             cmd.Parameters.Add("p_venta_id", OracleDbType.Int32).Value = ventaId;
             cmd.Parameters.Add("p_usuario_id", OracleDbType.Int32).Value = usuarioId;

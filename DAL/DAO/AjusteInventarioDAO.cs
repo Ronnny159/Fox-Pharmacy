@@ -11,7 +11,7 @@ public class AjusteInventarioDAO : BaseDAO, IAjusteInventarioDAO
 
     public void Insertar(AjusteInventario ajuste)
     {
-        EjecutarProcedimiento("SP_REGISTRAR_AJUSTE_INVENTARIO", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.REGISTRAR_AJUSTE", cmd =>
         {
             cmd.Parameters.Add("p_lote_id", OracleDbType.Int32).Value = ajuste.LoteId;
             cmd.Parameters.Add("p_tipo", OracleDbType.Varchar2).Value = ajuste.Tipo.ToString();
@@ -24,7 +24,7 @@ public class AjusteInventarioDAO : BaseDAO, IAjusteInventarioDAO
     public List<AjusteInventario> ObtenerPorLote(int loteId)
     {
         var lista = new List<AjusteInventario>();
-        EjecutarCursor("SP_OBTENER_AJUSTES_POR_LOTE",
+        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_AJUSTES_POR_LOTE",
             cmd => cmd.Parameters.Add("p_lote_id", OracleDbType.Int32).Value = loteId,
             reader => { while (reader.Read()) lista.Add(MapearAjuste(reader)); });
         return lista;
@@ -33,7 +33,7 @@ public class AjusteInventarioDAO : BaseDAO, IAjusteInventarioDAO
     public List<AjusteInventario> ObtenerPorResponsable(int usuarioId)
     {
         var lista = new List<AjusteInventario>();
-        EjecutarCursor("SP_OBTENER_AJUSTES_POR_RESPONSABLE",
+        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_AJUSTES_POR_RESPONSABLE",
             cmd => cmd.Parameters.Add("p_usuario_id", OracleDbType.Int32).Value = usuarioId,
             reader => { while (reader.Read()) lista.Add(MapearAjuste(reader)); });
         return lista;
@@ -42,7 +42,7 @@ public class AjusteInventarioDAO : BaseDAO, IAjusteInventarioDAO
     public List<AjusteInventario> ObtenerPorRangoFechas(DateTime desde, DateTime hasta)
     {
         var lista = new List<AjusteInventario>();
-        EjecutarCursor("SP_OBTENER_AJUSTES_POR_FECHAS",
+        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_AJUSTES_POR_FECHAS",
             cmd =>
             {
                 cmd.Parameters.Add("p_desde", OracleDbType.Date).Value = desde;

@@ -12,7 +12,7 @@ public class HistorialDescuentoProductoDAO : BaseDAO, IHistorialDescuentoProduct
 
     public void Insertar(HistorialDescuentoProducto historial)
     {
-        EjecutarProcedimiento("SP_INSERTAR_HISTORIAL_DESCUENTO", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_ALERTAS.INSERTAR_HISTORIAL_DESCUENTO", cmd =>
         {
             cmd.Parameters.Add("p_producto_id", OracleDbType.Int32).Value = historial.ProductoId;
             cmd.Parameters.Add("p_codigo_producto", OracleDbType.Varchar2).Value = historial.CodigoProducto;
@@ -29,7 +29,7 @@ public class HistorialDescuentoProductoDAO : BaseDAO, IHistorialDescuentoProduct
     public List<HistorialDescuentoProducto> ObtenerPorProducto(int productoId)
     {
         var lista = new List<HistorialDescuentoProducto>();
-        EjecutarCursor("SP_OBTENER_HISTORIAL_DESCUENTO_POR_PRODUCTO",
+        EjecutarCursor("PKG_PHARMASMART_ALERTAS.OBTENER_HISTORIAL_DESCUENTO_POR_PRODUCTO",
             cmd => cmd.Parameters.Add("p_producto_id", OracleDbType.Int32).Value = productoId,
             reader => { while (reader.Read()) lista.Add(MapearHistorial(reader)); });
         return lista;
@@ -38,7 +38,7 @@ public class HistorialDescuentoProductoDAO : BaseDAO, IHistorialDescuentoProduct
     public List<HistorialDescuentoProducto> ObtenerTodos()
     {
         var lista = new List<HistorialDescuentoProducto>();
-        EjecutarCursor("SP_OBTENER_TODO_HISTORIAL_DESCUENTO",
+        EjecutarCursor("PKG_PHARMASMART_ALERTAS.OBTENER_TODO_HISTORIAL_DESCUENTO",
             cmd => { },
             reader => { while (reader.Read()) lista.Add(MapearHistorial(reader)); });
         return lista;

@@ -12,7 +12,7 @@ public class DetalleVentaDAO : BaseDAO, IDetalleVentaDAO
     public List<DetalleVenta> ObtenerPorVenta(int ventaId)
     {
         var lista = new List<DetalleVenta>();
-        EjecutarCursor("SP_OBTENER_DETALLES_POR_VENTA",
+        EjecutarCursor("PKG_PHARMASMART_VENTAS.OBTENER_DETALLES_VENTA",
             cmd => cmd.Parameters.Add("p_venta_id", OracleDbType.Int32).Value = ventaId,
             reader => { while (reader.Read()) lista.Add(MapearDetalleVenta(reader)); });
         return lista;
@@ -21,7 +21,7 @@ public class DetalleVentaDAO : BaseDAO, IDetalleVentaDAO
     public List<DetalleVenta> ObtenerPorLote(int loteId)
     {
         var lista = new List<DetalleVenta>();
-        EjecutarCursor("SP_OBTENER_DETALLES_POR_LOTE",
+        EjecutarCursor("PKG_PHARMASMART_VENTAS.OBTENER_DETALLES_POR_LOTE",
             cmd => cmd.Parameters.Add("p_lote_id", OracleDbType.Int32).Value = loteId,
             reader => { while (reader.Read()) lista.Add(MapearDetalleVenta(reader)); });
         return lista;
@@ -29,7 +29,7 @@ public class DetalleVentaDAO : BaseDAO, IDetalleVentaDAO
 
     public void Insertar(DetalleVenta detalle)
     {
-        EjecutarProcedimiento("SP_INSERTAR_DETALLE_VENTA", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_VENTAS.INSERTAR_DETALLE_VENTA", cmd =>
         {
             cmd.Parameters.Add("p_venta_id", OracleDbType.Int32).Value = detalle.VentaId;
             cmd.Parameters.Add("p_lote_id", OracleDbType.Int32).Value = detalle.LoteId;

@@ -11,7 +11,7 @@ public class HistorialParametroDAO : BaseDAO, IHistorialParametroDAO
 
     public void Insertar(HistorialParametro historial)
     {
-        EjecutarProcedimiento("SP_INSERTAR_HISTORIAL_PARAMETRO", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_ALERTAS.INSERTAR_HISTORIAL_PARAMETRO", cmd =>
         {
             cmd.Parameters.Add("p_clave_parametro", OracleDbType.Varchar2).Value = historial.ClaveParametro;
             cmd.Parameters.Add("p_valor_anterior", OracleDbType.Varchar2).Value = historial.ValorAnterior;
@@ -25,7 +25,7 @@ public class HistorialParametroDAO : BaseDAO, IHistorialParametroDAO
     public List<HistorialParametro> ObtenerPorParametro(string clave)
     {
         var lista = new List<HistorialParametro>();
-        EjecutarCursor("SP_OBTENER_HISTORIAL_POR_PARAMETRO",
+        EjecutarCursor("PKG_PHARMASMART_ALERTAS.OBTENER_HISTORIAL_POR_PARAMETRO",
             cmd => cmd.Parameters.Add("p_clave", OracleDbType.Varchar2).Value = clave,
             reader => { while (reader.Read()) lista.Add(MapearHistorial(reader)); });
         return lista;
@@ -34,7 +34,7 @@ public class HistorialParametroDAO : BaseDAO, IHistorialParametroDAO
     public List<HistorialParametro> ObtenerPorUsuario(int usuarioId)
     {
         var lista = new List<HistorialParametro>();
-        EjecutarCursor("SP_OBTENER_HISTORIAL_POR_USUARIO",
+        EjecutarCursor("PKG_PHARMASMART_ALERTAS.OBTENER_HISTORIAL_POR_USUARIO",
             cmd => cmd.Parameters.Add("p_usuario_id", OracleDbType.Int32).Value = usuarioId,
             reader => { while (reader.Read()) lista.Add(MapearHistorial(reader)); });
         return lista;
@@ -43,7 +43,7 @@ public class HistorialParametroDAO : BaseDAO, IHistorialParametroDAO
     public List<HistorialParametro> ObtenerPorRangoFechas(DateTime desde, DateTime hasta)
     {
         var lista = new List<HistorialParametro>();
-        EjecutarCursor("SP_OBTENER_HISTORIAL_POR_FECHAS",
+        EjecutarCursor("PKG_PHARMASMART_ALERTAS.OBTENER_HISTORIAL_POR_FECHAS",
             cmd =>
             {
                 cmd.Parameters.Add("p_desde", OracleDbType.Date).Value = desde;

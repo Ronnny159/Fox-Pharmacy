@@ -12,7 +12,7 @@ public class ProductoDAO : BaseDAO, IProductoDAO
     public Producto? ObtenerPorCodigo(string codigo)
     {
         Producto? resultado = null;
-        EjecutarCursor("SP_OBTENER_PRODUCTO_POR_CODIGO",
+        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_PRODUCTO_POR_CODIGO",
             cmd => cmd.Parameters.Add("p_codigo", OracleDbType.Varchar2).Value = codigo,
             reader => { if (reader.Read()) resultado = MapearProducto(reader); });
         return resultado;
@@ -21,7 +21,7 @@ public class ProductoDAO : BaseDAO, IProductoDAO
     public Producto? ObtenerPorId(int id)
     {
         Producto? resultado = null;
-        EjecutarCursor("SP_OBTENER_PRODUCTO_POR_ID",
+        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_PRODUCTO_POR_ID",
             cmd => cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = id,
             reader => { if (reader.Read()) resultado = MapearProducto(reader); });
         return resultado;
@@ -30,7 +30,7 @@ public class ProductoDAO : BaseDAO, IProductoDAO
     public Producto? ObtenerPorNombre(string nombre)
     {
         Producto? resultado = null;
-        EjecutarCursor("SP_OBTENER_PRODUCTO_POR_NOMBRE",
+        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_PRODUCTO_POR_NOMBRE",
             cmd => cmd.Parameters.Add("p_nombre", OracleDbType.Varchar2).Value = nombre,
             reader => { if (reader.Read()) resultado = MapearProducto(reader); });
         return resultado;
@@ -39,7 +39,7 @@ public class ProductoDAO : BaseDAO, IProductoDAO
     public List<Producto> ObtenerTodos()
     {
         var lista = new List<Producto>();
-        EjecutarCursor("SP_OBTENER_TODOS_PRODUCTOS",
+        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_TODOS_PRODUCTOS",
             cmd => { },
             reader => { while (reader.Read()) lista.Add(MapearProducto(reader)); });
         return lista;
@@ -47,7 +47,7 @@ public class ProductoDAO : BaseDAO, IProductoDAO
 
     public void Insertar(Producto producto)
     {
-        EjecutarProcedimiento("SP_INSERTAR_PRODUCTO", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.INSERTAR_PRODUCTO", cmd =>
         {
             cmd.Parameters.Add("p_codigo", OracleDbType.Varchar2).Value = producto.Codigo;
             cmd.Parameters.Add("p_nombre", OracleDbType.Varchar2).Value = producto.Nombre;
@@ -60,7 +60,7 @@ public class ProductoDAO : BaseDAO, IProductoDAO
 
     public void Actualizar(Producto producto)
     {
-        EjecutarProcedimiento("SP_ACTUALIZAR_PRODUCTO", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.ACTUALIZAR_PRODUCTO", cmd =>
         {
             cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = producto.Id;
             cmd.Parameters.Add("p_nombre", OracleDbType.Varchar2).Value = producto.Nombre;
@@ -73,7 +73,7 @@ public class ProductoDAO : BaseDAO, IProductoDAO
 
     public void ActualizarDescuentoIndividual(int productoId, decimal? descuento)
     {
-        EjecutarProcedimiento("SP_ACTUALIZAR_DESCUENTO_INDIVIDUAL", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.ACTUALIZAR_DESCUENTO_INDIVIDUAL", cmd =>
         {
             cmd.Parameters.Add("p_producto_id", OracleDbType.Int32).Value = productoId;
             cmd.Parameters.Add("p_descuento", OracleDbType.Decimal).Value = (object?)descuento ?? DBNull.Value;
@@ -82,7 +82,7 @@ public class ProductoDAO : BaseDAO, IProductoDAO
 
     public void Eliminar(int id)
     {
-        EjecutarProcedimiento("SP_ELIMINAR_PRODUCTO",
+        EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.ELIMINAR_PRODUCTO",
             cmd => cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = id);
     }
 

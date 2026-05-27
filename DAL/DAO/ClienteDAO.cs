@@ -12,7 +12,7 @@ public class ClienteDAO : BaseDAO, IClienteDAO
     public Cliente? ObtenerPorDocumento(string documento)
     {
         Cliente? resultado = null;
-        EjecutarCursor("SP_OBTENER_CLIENTE_POR_DOCUMENTO",
+        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_CLIENTE_POR_DOCUMENTO",
             cmd => cmd.Parameters.Add("p_documento", OracleDbType.Varchar2).Value = documento,
             reader => { if (reader.Read()) resultado = MapearCliente(reader); });
         return resultado;
@@ -21,7 +21,7 @@ public class ClienteDAO : BaseDAO, IClienteDAO
     public Cliente? ObtenerPorId(int id)
     {
         Cliente? resultado = null;
-        EjecutarCursor("SP_OBTENER_CLIENTE_POR_ID",
+        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_CLIENTE_POR_ID",
             cmd => cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = id,
             reader => { if (reader.Read()) resultado = MapearCliente(reader); });
         return resultado;
@@ -30,7 +30,7 @@ public class ClienteDAO : BaseDAO, IClienteDAO
     public Cliente? ObtenerPorChatId(string chatId)
     {
         Cliente? resultado = null;
-        EjecutarCursor("SP_OBTENER_CLIENTE_POR_CHAT_ID",
+        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_CLIENTE_POR_CHAT_ID",
             cmd => cmd.Parameters.Add("p_chat_id", OracleDbType.Varchar2).Value = chatId,
             reader => { if (reader.Read()) resultado = MapearCliente(reader); });
         return resultado;
@@ -39,7 +39,7 @@ public class ClienteDAO : BaseDAO, IClienteDAO
     public List<Cliente> ObtenerTodosFidelizacion()
     {
         var lista = new List<Cliente>();
-        EjecutarCursor("SP_OBTENER_CLIENTES_FIDELIZACION",
+        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_CLIENTES_FIDELIZACION",
             cmd => { },
             reader => { while (reader.Read()) lista.Add(MapearCliente(reader)); });
         return lista;
@@ -47,7 +47,7 @@ public class ClienteDAO : BaseDAO, IClienteDAO
 
     public void Insertar(Cliente cliente)
     {
-        EjecutarProcedimiento("SP_INSERTAR_CLIENTE", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.INSERTAR_CLIENTE", cmd =>
         {
             cmd.Parameters.Add("p_documento", OracleDbType.Varchar2).Value = cliente.Documento;
             cmd.Parameters.Add("p_nombre_completo", OracleDbType.Varchar2).Value = cliente.NombreCompleto;
@@ -60,7 +60,7 @@ public class ClienteDAO : BaseDAO, IClienteDAO
 
     public void Actualizar(Cliente cliente)
     {
-        EjecutarProcedimiento("SP_ACTUALIZAR_CLIENTE", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.ACTUALIZAR_CLIENTE", cmd =>
         {
             cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = cliente.Id;
             cmd.Parameters.Add("p_nombre_completo", OracleDbType.Varchar2).Value = cliente.NombreCompleto;
