@@ -107,6 +107,7 @@ CREATE OR REPLACE PACKAGE BODY PKG_PHARMASMART_CONFIG AS
     ) IS
         v_rol NUMBER;
         v_producto PRODUCTO%ROWTYPE;
+        v_accion VARCHAR2(20);
     BEGIN
         SELECT ROL INTO v_rol FROM USUARIO WHERE ID = p_usuario_id;
         IF v_rol != 1 THEN
@@ -115,6 +116,14 @@ CREATE OR REPLACE PACKAGE BODY PKG_PHARMASMART_CONFIG AS
         
         SELECT * INTO v_producto FROM PRODUCTO WHERE ID = p_producto_id;
         
+        IF v_producto.DESCUENTO_PROXIMIDAD_VENCIMIENTO IS NULL AND p_descuento IS NOT NULL THEN
+            v_accion := 'CREAR';
+        ELSIF v_producto.DESCUENTO_PROXIMIDAD_VENCIMIENTO IS NOT NULL AND p_descuento IS NULL THEN
+            v_accion := 'ELIMINAR';
+        ELSE
+            v_accion := 'MODIFICAR';
+        END IF;
+        
         INSERT INTO HISTORIAL_DESCUENTO_PRODUCTO (
             PRODUCTO_ID, CODIGO_PRODUCTO, NOMBRE_PRODUCTO,
             DESCUENTO_ANTERIOR, DESCUENTO_NUEVO, ACCION, MOTIVO,
@@ -122,10 +131,7 @@ CREATE OR REPLACE PACKAGE BODY PKG_PHARMASMART_CONFIG AS
         ) VALUES (
             p_producto_id, v_producto.CODIGO, v_producto.NOMBRE,
             v_producto.DESCUENTO_PROXIMIDAD_VENCIMIENTO, p_descuento,
-            CASE WHEN v_producto.DESCUENTO_PROXIMIDAD_VENCIMIENTO IS NULL THEN 'CREAR'
-                 WHEN p_descuento IS NULL THEN 'ELIMINAR'
-                 ELSE 'MODIFICAR' END,
-            p_motivo, p_usuario_id, p_ip
+            v_accion, p_motivo, p_usuario_id, p_ip
         );
         
         UPDATE PRODUCTO SET DESCUENTO_PROXIMIDAD_VENCIMIENTO = p_descuento
@@ -152,10 +158,14 @@ CREATE OR REPLACE PACKAGE BODY PKG_PHARMASMART_CONFIG AS
         SELECT CANTIDAD_ACTUAL + p_cantidad INTO v_cantidad_resultante
         FROM LOTE WHERE ID = p_lote_id;
         
-        IF v_cantidad_resultante <= 0 THEN v_nuevo_estado := 3;
-        ELSIF p_tipo = 'Vencido' THEN v_nuevo_estado := 3;
-        ELSIF p_tipo = 'RetiroLegal' THEN v_nuevo_estado := 4;
-        ELSE SELECT ESTADO INTO v_nuevo_estado FROM LOTE WHERE ID = p_lote_id;
+        IF v_cantidad_resultante <= 0 THEN 
+            v_nuevo_estado := 3;
+        ELSIF p_tipo = 'Vencido' THEN 
+            v_nuevo_estado := 3;
+        ELSIF p_tipo = 'RetiroLegal' THEN 
+            v_nuevo_estado := 4;
+        ELSE 
+            SELECT ESTADO INTO v_nuevo_estado FROM LOTE WHERE ID = p_lote_id;
         END IF;
         
         UPDATE LOTE SET CANTIDAD_ACTUAL = v_cantidad_resultante, ESTADO = v_nuevo_estado

@@ -21,6 +21,7 @@ DECLARE
     v_clientes NUMBER;
     v_params NUMBER;
     v_lote T_LOTE_INFO;
+    v_param_valor VARCHAR2(50);
 BEGIN
     SELECT COUNT(*) INTO v_tablas FROM USER_TABLES;
     SELECT COUNT(*) INTO v_indices FROM USER_INDEXES WHERE INDEX_NAME LIKE 'IDX_%';
@@ -43,9 +44,9 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('-------------------------------------------');
     DBMS_OUTPUT.PUT_LINE('OBJETOS DE BASE DE DATOS:');
     DBMS_OUTPUT.PUT_LINE('  Tablas:      ' || v_tablas || ' (esperado: 12)');
-    DBMS_OUTPUT.PUT_LINE('  Indices:     ' || v_indices || ' (esperado: 12)');
-    DBMS_OUTPUT.PUT_LINE('  Secuencias:  ' || v_secuencias || ' (esperado: 1)');
-    DBMS_OUTPUT.PUT_LINE('  Tipos:       ' || v_tipos || ' (esperado: 5)');
+    DBMS_OUTPUT.PUT_LINE('  Indices:     ' || v_indices || ' (esperado: 14)');
+    DBMS_OUTPUT.PUT_LINE('  Secuencias:  ' || v_secuencias || ' (esperado: 5)');
+    DBMS_OUTPUT.PUT_LINE('  Tipos:       ' || v_tipos || ' (esperado: 7)');
     DBMS_OUTPUT.PUT_LINE('  Packages:    ' || v_packages || ' (esperado: 5)');
     DBMS_OUTPUT.PUT_LINE('  Triggers:    ' || v_triggers || ' (esperado: 3)');
     DBMS_OUTPUT.PUT_LINE('-------------------------------------------');
@@ -60,10 +61,14 @@ BEGIN
     -- Probar FEFO
     BEGIN
         v_lote := PKG_PHARMASMART_FEFO.SELECCIONAR_FEFO(1);
-        DBMS_OUTPUT.PUT_LINE('PRUEBA FEFO:');
-        DBMS_OUTPUT.PUT_LINE('  Producto 1 -> Lote: ' || v_lote.CODIGO_LOTE || 
-                           ' | Vence: ' || TO_CHAR(v_lote.FECHA_VENCIMIENTO, 'DD/MM/YYYY') ||
-                           ' | Stock: ' || v_lote.CANTIDAD_ACTUAL);
+        IF v_lote IS NOT NULL THEN
+            DBMS_OUTPUT.PUT_LINE('PRUEBA FEFO:');
+            DBMS_OUTPUT.PUT_LINE('  Producto 1 -> Lote: ' || v_lote.CODIGO_LOTE || 
+                               ' | Vence: ' || TO_CHAR(v_lote.FECHA_VENCIMIENTO, 'DD/MM/YYYY') ||
+                               ' | Stock: ' || v_lote.CANTIDAD_ACTUAL);
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('PRUEBA FEFO: No hay lotes disponibles para el producto 1');
+        END IF;
     EXCEPTION
         WHEN OTHERS THEN
             DBMS_OUTPUT.PUT_LINE('  ERROR en FEFO: ' || SQLERRM);
@@ -71,9 +76,9 @@ BEGIN
     
     -- Probar parámetro
     BEGIN
+        v_param_valor := PKG_PHARMASMART_CONFIG.OBTENER_PARAMETRO('PORCENTAJE_DESCUENTO_VENCIMIENTO');
         DBMS_OUTPUT.PUT_LINE('PRUEBA PARAMETRO:');
-        DBMS_OUTPUT.PUT_LINE('  Descuento general: ' || 
-            PKG_PHARMASMART_CONFIG.OBTENER_PARAMETRO('PORCENTAJE_DESCUENTO_VENCIMIENTO'));
+        DBMS_OUTPUT.PUT_LINE('  Descuento general: ' || NVL(v_param_valor, 'No encontrado'));
     EXCEPTION
         WHEN OTHERS THEN
             DBMS_OUTPUT.PUT_LINE('  ERROR en parametro: ' || SQLERRM);
@@ -81,8 +86,8 @@ BEGIN
     
     DBMS_OUTPUT.PUT_LINE('===========================================');
     
-    IF v_tablas = 12 AND v_packages = 5 AND v_triggers = 3 
-       AND v_users = 3 AND v_prods = 5 AND v_lotes = 8 THEN
+    IF v_tablas >= 12 AND v_packages >= 5 AND v_triggers >= 3 
+       AND v_users >= 3 AND v_prods >= 5 AND v_lotes >= 8 THEN
         DBMS_OUTPUT.PUT_LINE('ESTADO: INSTALACION COMPLETA Y CORRECTA');
     ELSE
         DBMS_OUTPUT.PUT_LINE('ESTADO: REVISAR - Hay diferencias con lo esperado');

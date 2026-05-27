@@ -32,6 +32,16 @@ CREATE OR REPLACE PACKAGE PKG_PHARMASMART_ALERTAS AS
     -- Obtener alertas por cliente
     PROCEDURE OBTENER_ALERTAS_CLIENTE(p_cliente_id NUMBER, p_cursor OUT SYS_REFCURSOR);
     
+    -- Insertar historial de parámetros
+    PROCEDURE INSERTAR_HISTORIAL_PARAMETRO(
+        p_clave_parametro VARCHAR2,
+        p_valor_anterior VARCHAR2,
+        p_valor_nuevo VARCHAR2,
+        p_motivo VARCHAR2,
+        p_modificado_por_id NUMBER,
+        p_direccion_ip VARCHAR2 DEFAULT NULL
+    );
+    
 END PKG_PHARMASMART_ALERTAS;
 /
 
@@ -87,6 +97,25 @@ CREATE OR REPLACE PACKAGE BODY PKG_PHARMASMART_ALERTAS AS
             FROM ALERTA_FIDELIZACION
             WHERE CLIENTE_ID = p_cliente_id AND ACTIVO = 1
             ORDER BY FECHA_ENVIO DESC;
+    END;
+    
+    PROCEDURE INSERTAR_HISTORIAL_PARAMETRO(
+        p_clave_parametro VARCHAR2,
+        p_valor_anterior VARCHAR2,
+        p_valor_nuevo VARCHAR2,
+        p_motivo VARCHAR2,
+        p_modificado_por_id NUMBER,
+        p_direccion_ip VARCHAR2 DEFAULT NULL
+    ) IS
+    BEGIN
+        INSERT INTO HISTORIAL_PARAMETRO (
+            CLAVE_PARAMETRO, VALOR_ANTERIOR, VALOR_NUEVO, 
+            MOTIVO, MODIFICADO_POR_ID, DIRECCION_IP
+        ) VALUES (
+            p_clave_parametro, p_valor_anterior, p_valor_nuevo,
+            p_motivo, p_modificado_por_id, p_direccion_ip
+        );
+        COMMIT;
     END;
 
 END PKG_PHARMASMART_ALERTAS;

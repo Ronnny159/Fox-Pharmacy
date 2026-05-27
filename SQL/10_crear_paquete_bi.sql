@@ -11,9 +11,11 @@ SET ECHO ON;
 -- Especificación del Package
 CREATE OR REPLACE PACKAGE PKG_PHARMASMART_BI AS
     
-    -- Top productos más/menos vendidos
-    FUNCTION OBTENER_TOP_PRODUCTOS(p_top NUMBER DEFAULT 10, p_orden VARCHAR2 DEFAULT 'MAYOR') 
-        RETURN T_TOP_PRODUCTO_TABLA PIPELINED;
+    -- Top productos más vendidos
+    PROCEDURE OBTENER_TOP_PRODUCTOS(p_top NUMBER DEFAULT 10, p_cursor OUT SYS_REFCURSOR);
+    
+    -- Bottom productos menos vendidos
+    PROCEDURE OBTENER_BOTTOM_PRODUCTOS(p_bottom NUMBER DEFAULT 10, p_cursor OUT SYS_REFCURSOR);
     
     -- Resumen de ventas por período
     PROCEDURE RESUMEN_VENTAS(p_desde DATE, p_hasta DATE, p_cursor OUT SYS_REFCURSOR);
@@ -30,40 +32,34 @@ END PKG_PHARMASMART_BI;
 -- Cuerpo del Package
 CREATE OR REPLACE PACKAGE BODY PKG_PHARMASMART_BI AS
 
-    FUNCTION OBTENER_TOP_PRODUCTOS(p_top NUMBER DEFAULT 10, p_orden VARCHAR2 DEFAULT 'MAYOR') 
-        RETURN T_TOP_PRODUCTO_TABLA PIPELINED IS
+    PROCEDURE OBTENER_TOP_PRODUCTOS(p_top NUMBER DEFAULT 10, p_cursor OUT SYS_REFCURSOR) IS
     BEGIN
-        IF p_orden = 'MAYOR' THEN
-            FOR rec IN (
-                SELECT p.CODIGO, p.NOMBRE, SUM(dv.CANTIDAD) AS UNIDADES,
-                       SUM(dv.CANTIDAD * dv.PRECIO_APLICADO) AS TOTAL
-                FROM DETALLE_VENTA dv
-                JOIN LOTE l ON dv.LOTE_ID = l.ID
-                JOIN PRODUCTO p ON l.PRODUCTO_ID = p.ID
-                JOIN VENTA v ON dv.VENTA_ID = v.ID
-                WHERE v.ANULADA = 0
-                GROUP BY p.CODIGO, p.NOMBRE
-                ORDER BY SUM(dv.CANTIDAD) DESC
-                FETCH FIRST p_top ROWS ONLY
-            ) LOOP
-                PIPE ROW (T_TOP_PRODUCTO(rec.CODIGO, rec.NOMBRE, rec.UNIDADES, rec.TOTAL));
-            END LOOP;
-        ELSE
-            FOR rec IN (
-                SELECT p.CODIGO, p.NOMBRE, SUM(dv.CANTIDAD) AS UNIDADES,
-                       SUM(dv.CANTIDAD * dv.PRECIO_APLICADO) AS TOTAL
-                FROM DETALLE_VENTA dv
-                JOIN LOTE l ON dv.LOTE_ID = l.ID
-                JOIN PRODUCTO p ON l.PRODUCTO_ID = p.ID
-                JOIN VENTA v ON dv.VENTA_ID = v.ID
-                WHERE v.ANULADA = 0
-                GROUP BY p.CODIGO, p.NOMBRE
-                ORDER BY SUM(dv.CANTIDAD) ASC
-                FETCH FIRST p_top ROWS ONLY
-            ) LOOP
-                PIPE ROW (T_TOP_PRODUCTO(rec.CODIGO, rec.NOMBRE, rec.UNIDADES, rec.TOTAL));
-            END LOOP;
-        END IF;
+        OPEN p_cursor FOR
+            SELECT p.CODIGO, p.NOMBRE, SUM(dv.CANTIDAD) AS UNIDADES_VENDIDAS,
+                   SUM(dv.CANTIDAD * dv.PRECIO_APLICADO) AS TOTAL_VENDIDO
+            FROM DETALLE_VENTA dv
+            JOIN LOTE l ON dv.LOTE_ID = l.ID
+            JOIN PRODUCTO p ON l.PRODUCTO_ID = p.ID
+            JOIN VENTA v ON dv.VENTA_ID = v.ID
+            WHERE v.ANULADA = 0
+            GROUP BY p.CODIGO, p.NOMBRE
+            ORDER BY SUM(dv.CANTIDAD) DESC
+            FETCH FIRST p_top ROWS ONLY;
+    END;
+
+    PROCEDURE OBTENER_BOTTOM_PRODUCTOS(p_bottom NUMBER DEFAULT 10, p_cursor OUT SYS_REFCURSOR) IS
+    BEGIN
+        OPEN p_cursor FOR
+            SELECT p.CODIGO, p.NOMBRE, SUM(dv.CANTIDAD) AS UNIDADES_VENDIDAS,
+                   SUM(dv.CANTIDAD * dv.PRECIO_APLICADO) AS TOTAL_VENDIDO
+            FROM DETALLE_VENTA dv
+            JOIN LOTE l ON dv.LOTE_ID = l.ID
+            JOIN PRODUCTO p ON l.PRODUCTO_ID = p.ID
+            JOIN VENTA v ON dv.VENTA_ID = v.ID
+            WHERE v.ANULADA = 0
+            GROUP BY p.CODIGO, p.NOMBRE
+            ORDER BY SUM(dv.CANTIDAD) ASC
+            FETCH FIRST p_bottom ROWS ONLY;
     END;
 
     PROCEDURE RESUMEN_VENTAS(p_desde DATE, p_hasta DATE, p_cursor OUT SYS_REFCURSOR) IS
@@ -97,8 +93,8 @@ CREATE OR REPLACE PACKAGE BODY PKG_PHARMASMART_BI AS
         OPEN p_cursor FOR
             SELECT p.CODIGO, p.NOMBRE, 
                    COUNT(l.ID) AS TOTAL_LOTES,
-                   SUM(l.CANTIDAD_ACTUAL) AS STOCK_TOTAL,
-                   SUM(l.CANTIDAD_ACTUAL * l.PRECIO_VENTA) AS VALOR_INVENTARIO
+                   SUM(NVL(l.CANTIDAD_ACTUAL, 0)) AS STOCK_TOTAL,
+                   SUM(NVL(l.CANTIDAD_ACTUAL, 0) * NVL(l.PRECIO_VENTA, 0)) AS VALOR_INVENTARIO
             FROM PRODUCTO p
             LEFT JOIN LOTE l ON p.ID = l.PRODUCTO_ID AND l.ESTADO = 1 AND l.ACTIVO = 1
             WHERE p.ACTIVO = 1
