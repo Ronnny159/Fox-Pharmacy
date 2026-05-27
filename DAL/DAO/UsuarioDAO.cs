@@ -3,117 +3,72 @@ using DAL.Core;
 using DAL.Interfaces;
 using Entity;
 
-namespace DAL.Repositories;
+namespace DAL.DAO;
 
-public class UsuarioRepository : BaseRepository, IUsuarioRepository
+public class UsuarioDAO : BaseDAO, IUsuarioDAO
 {
-    public UsuarioRepository(IOracleConnectionFactory conexionFactory)
-        : base(conexionFactory) { }
+    public UsuarioDAO(IOracleConnectionFactory conexionFactory) : base(conexionFactory) { }
 
     public Usuario? ObtenerPorCredenciales(string nombreUsuario, string hashContrasena)
     {
-        const string sql = @"
-            SELECT ID, NOMBRE_USUARIO, HASH_CONTRASENA, NOMBRE_COMPLETO, ROL, DOCUMENTO_IDENTIDAD,
-                   ACTIVO, FECHA_CREACION
-            FROM USUARIO 
-            WHERE NOMBRE_USUARIO = :user AND HASH_CONTRASENA = :hash AND ACTIVO = 1";
-
-        return EjecutarConsulta(sql, cmd =>
-        {
-            cmd.Parameters.Add("user", OracleDbType.Varchar2).Value = nombreUsuario;
-            cmd.Parameters.Add("hash", OracleDbType.Varchar2).Value = hashContrasena;
-        }, MapearUsuario);
-    }
-
-    /// <summary>
-    /// Versión asíncrona de ObtenerPorCredenciales.
-    /// Ideal para llamadas desde servicios que requieren no bloquear el hilo principal.
-    /// </summary>
-    public async Task<Usuario?> ObtenerPorCredencialesAsync(string nombreUsuario, string hashContrasena)
-    {
-        const string sql = @"
-            SELECT ID, NOMBRE_USUARIO, HASH_CONTRASENA, NOMBRE_COMPLETO, ROL, DOCUMENTO_IDENTIDAD,
-                   ACTIVO, FECHA_CREACION
-            FROM USUARIO 
-            WHERE NOMBRE_USUARIO = :user AND HASH_CONTRASENA = :hash AND ACTIVO = 1";
-
-        return await Task.Run(() =>
-        {
-            return EjecutarConsulta(sql, cmd =>
+        Usuario? resultado = null;
+        EjecutarCursor("SP_OBTENER_USUARIO_POR_CREDENCIALES",
+            cmd =>
             {
-                cmd.Parameters.Add("user", OracleDbType.Varchar2).Value = nombreUsuario;
-                cmd.Parameters.Add("hash", OracleDbType.Varchar2).Value = hashContrasena;
-            }, MapearUsuario);
-        });
+                cmd.Parameters.Add("p_nombre_usuario", OracleDbType.Varchar2).Value = nombreUsuario;
+                cmd.Parameters.Add("p_hash_contrasena", OracleDbType.Varchar2).Value = hashContrasena;
+            },
+            reader => { if (reader.Read()) resultado = MapearUsuario(reader); });
+        return resultado;
     }
 
     public Usuario? ObtenerPorId(int id)
     {
-        const string sql = @"
-            SELECT ID, NOMBRE_USUARIO, HASH_CONTRASENA, NOMBRE_COMPLETO, ROL, DOCUMENTO_IDENTIDAD,
-                   ACTIVO, FECHA_CREACION
-            FROM USUARIO 
-            WHERE ID = :id";
-
-        return EjecutarConsulta(sql,
-            cmd => cmd.Parameters.Add("id", OracleDbType.Int32).Value = id,
-            MapearUsuario);
+        Usuario? resultado = null;
+        EjecutarCursor("SP_OBTENER_USUARIO_POR_ID",
+            cmd => cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = id,
+            reader => { if (reader.Read()) resultado = MapearUsuario(reader); });
+        return resultado;
     }
 
     public Usuario? ObtenerPorDocumento(string documento)
     {
-        const string sql = @"
-            SELECT ID, NOMBRE_USUARIO, HASH_CONTRASENA, NOMBRE_COMPLETO, ROL, DOCUMENTO_IDENTIDAD,
-                   ACTIVO, FECHA_CREACION
-            FROM USUARIO 
-            WHERE DOCUMENTO_IDENTIDAD = :doc";
-
-        return EjecutarConsulta(sql,
-            cmd => cmd.Parameters.Add("doc", OracleDbType.Varchar2).Value = documento,
-            MapearUsuario);
+        Usuario? resultado = null;
+        EjecutarCursor("SP_OBTENER_USUARIO_POR_DOCUMENTO",
+            cmd => cmd.Parameters.Add("p_documento", OracleDbType.Varchar2).Value = documento,
+            reader => { if (reader.Read()) resultado = MapearUsuario(reader); });
+        return resultado;
     }
 
-    public IEnumerable<Usuario> ObtenerTodos()
+    public List<Usuario> ObtenerTodos()
     {
-        const string sql = @"
-            SELECT ID, NOMBRE_USUARIO, HASH_CONTRASENA, NOMBRE_COMPLETO, ROL, DOCUMENTO_IDENTIDAD,
-                   ACTIVO, FECHA_CREACION
-            FROM USUARIO 
-            WHERE ACTIVO = 1
-            ORDER BY NOMBRE_COMPLETO";
-
-        return EjecutarConsultaLista(sql, cmd => { }, MapearUsuario);
+        var lista = new List<Usuario>();
+        EjecutarCursor("SP_OBTENER_TODOS_USUARIOS",
+            cmd => { },
+            reader => { while (reader.Read()) lista.Add(MapearUsuario(reader)); });
+        return lista;
     }
 
     public void Insertar(Usuario usuario)
     {
-        const string sql = @"
-            INSERT INTO USUARIO (NOMBRE_USUARIO, HASH_CONTRASENA, NOMBRE_COMPLETO, ROL, DOCUMENTO_IDENTIDAD)
-            VALUES (:user, :hash, :nombre, :rol, :documento)";
-
-        EjecutarComando(sql, cmd =>
+        EjecutarProcedimiento("SP_INSERTAR_USUARIO", cmd =>
         {
-            cmd.Parameters.Add("user", OracleDbType.Varchar2).Value = usuario.NombreUsuario;
-            cmd.Parameters.Add("hash", OracleDbType.Varchar2).Value = usuario.HashContrasena;
-            cmd.Parameters.Add("nombre", OracleDbType.Varchar2).Value = usuario.NombreCompleto;
-            cmd.Parameters.Add("rol", OracleDbType.Int32).Value = (int)usuario.Rol;
-            cmd.Parameters.Add("documento", OracleDbType.Varchar2).Value = usuario.DocumentoIdentidad;
+            cmd.Parameters.Add("p_nombre_usuario", OracleDbType.Varchar2).Value = usuario.NombreUsuario;
+            cmd.Parameters.Add("p_hash_contrasena", OracleDbType.Varchar2).Value = usuario.HashContrasena;
+            cmd.Parameters.Add("p_nombre_completo", OracleDbType.Varchar2).Value = usuario.NombreCompleto;
+            cmd.Parameters.Add("p_rol", OracleDbType.Int32).Value = (int)usuario.Rol;
+            cmd.Parameters.Add("p_documento", OracleDbType.Varchar2).Value = usuario.DocumentoIdentidad;
         });
     }
 
     public void Actualizar(Usuario usuario)
     {
-        const string sql = @"
-            UPDATE USUARIO 
-            SET NOMBRE_COMPLETO = :nombre, ROL = :rol, ACTIVO = :activo
-            WHERE ID = :id";
-
-        EjecutarComando(sql, cmd =>
+        EjecutarProcedimiento("SP_ACTUALIZAR_USUARIO", cmd =>
         {
-            cmd.Parameters.Add("id", OracleDbType.Int32).Value = usuario.Id;
-            cmd.Parameters.Add("nombre", OracleDbType.Varchar2).Value = usuario.NombreCompleto;
-            cmd.Parameters.Add("rol", OracleDbType.Int32).Value = (int)usuario.Rol;
-            cmd.Parameters.Add("activo", OracleDbType.Int16).Value = usuario.Activo ? 1 : 0;
+            cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = usuario.Id;
+            cmd.Parameters.Add("p_nombre_completo", OracleDbType.Varchar2).Value = usuario.NombreCompleto;
+            cmd.Parameters.Add("p_rol", OracleDbType.Int32).Value = (int)usuario.Rol;
+            cmd.Parameters.Add("p_activo", OracleDbType.Int32).Value = usuario.Activo ? 1 : 0;
         });
     }
 
@@ -131,4 +86,14 @@ public class UsuarioRepository : BaseRepository, IUsuarioRepository
             FechaCreacion = reader.GetDateTime(reader.GetOrdinal("FECHA_CREACION"))
         };
     }
-}  
+
+    public Task<Usuario?> ObtenerPorCredencialesAsync(string nombreUsuario, string hashContrasena)
+    {
+        throw new NotImplementedException();
+    }
+
+    IEnumerable<Usuario> IUsuarioDAO.ObtenerTodos()
+    {
+        return ObtenerTodos();
+    }
+}

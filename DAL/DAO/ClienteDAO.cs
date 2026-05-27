@@ -3,97 +3,71 @@ using DAL.Interfaces;
 using Entity;
 using Oracle.ManagedDataAccess.Client;
 
-namespace DAL.Repositories;
+namespace DAL.DAO;
 
-public class ClienteRepository : BaseRepository, IClienteRepository
+public class ClienteDAO : BaseDAO, IClienteDAO
 {
-    public ClienteRepository(IOracleConnectionFactory conexionFactory)
-        : base(conexionFactory) { }
+    public ClienteDAO(IOracleConnectionFactory conexionFactory) : base(conexionFactory) { }
 
     public Cliente? ObtenerPorDocumento(string documento)
     {
-        const string sql = @"
-            SELECT ID, DOCUMENTO, NOMBRE_COMPLETO, TELEFONO, CORREO, CHAT_ID, MEDICAMENTO_RECURRENTE,
-                   ACTIVO, FECHA_CREACION
-            FROM CLIENTE 
-            WHERE DOCUMENTO = :doc AND ACTIVO = 1";
-
-        return EjecutarConsulta(sql,
-            cmd => cmd.Parameters.Add("doc", OracleDbType.Varchar2).Value = documento,
-            MapearCliente);
+        Cliente? resultado = null;
+        EjecutarCursor("SP_OBTENER_CLIENTE_POR_DOCUMENTO",
+            cmd => cmd.Parameters.Add("p_documento", OracleDbType.Varchar2).Value = documento,
+            reader => { if (reader.Read()) resultado = MapearCliente(reader); });
+        return resultado;
     }
 
     public Cliente? ObtenerPorId(int id)
     {
-        const string sql = @"
-            SELECT ID, DOCUMENTO, NOMBRE_COMPLETO, TELEFONO, CORREO, CHAT_ID, MEDICAMENTO_RECURRENTE,
-                   ACTIVO, FECHA_CREACION
-            FROM CLIENTE 
-            WHERE ID = :id";
-
-        return EjecutarConsulta(sql,
-            cmd => cmd.Parameters.Add("id", OracleDbType.Int32).Value = id,
-            MapearCliente);
+        Cliente? resultado = null;
+        EjecutarCursor("SP_OBTENER_CLIENTE_POR_ID",
+            cmd => cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = id,
+            reader => { if (reader.Read()) resultado = MapearCliente(reader); });
+        return resultado;
     }
 
     public Cliente? ObtenerPorChatId(string chatId)
     {
-        const string sql = @"
-            SELECT ID, DOCUMENTO, NOMBRE_COMPLETO, TELEFONO, CORREO, CHAT_ID, MEDICAMENTO_RECURRENTE,
-                   ACTIVO, FECHA_CREACION
-            FROM CLIENTE 
-            WHERE CHAT_ID = :chatId AND ACTIVO = 1";
-
-        return EjecutarConsulta(sql,
-            cmd => cmd.Parameters.Add("chatId", OracleDbType.Varchar2).Value = chatId,
-            MapearCliente);
+        Cliente? resultado = null;
+        EjecutarCursor("SP_OBTENER_CLIENTE_POR_CHAT_ID",
+            cmd => cmd.Parameters.Add("p_chat_id", OracleDbType.Varchar2).Value = chatId,
+            reader => { if (reader.Read()) resultado = MapearCliente(reader); });
+        return resultado;
     }
 
-    public IEnumerable<Cliente> ObtenerTodosFidelizacion()
+    public List<Cliente> ObtenerTodosFidelizacion()
     {
-        const string sql = @"
-            SELECT ID, DOCUMENTO, NOMBRE_COMPLETO, TELEFONO, CORREO, CHAT_ID, MEDICAMENTO_RECURRENTE,
-                   ACTIVO, FECHA_CREACION
-            FROM CLIENTE 
-            WHERE ACTIVO = 1 AND CHAT_ID IS NOT NULL
-            ORDER BY NOMBRE_COMPLETO";
-
-        return EjecutarConsultaLista(sql, cmd => { }, MapearCliente);
+        var lista = new List<Cliente>();
+        EjecutarCursor("SP_OBTENER_CLIENTES_FIDELIZACION",
+            cmd => { },
+            reader => { while (reader.Read()) lista.Add(MapearCliente(reader)); });
+        return lista;
     }
 
     public void Insertar(Cliente cliente)
     {
-        const string sql = @"
-            INSERT INTO CLIENTE (DOCUMENTO, NOMBRE_COMPLETO, TELEFONO, CORREO, CHAT_ID, MEDICAMENTO_RECURRENTE)
-            VALUES (:doc, :nombre, :tel, :correo, :chatId, :medRecurrente)";
-
-        EjecutarComando(sql, cmd =>
+        EjecutarProcedimiento("SP_INSERTAR_CLIENTE", cmd =>
         {
-            cmd.Parameters.Add("doc", OracleDbType.Varchar2).Value = cliente.Documento;
-            cmd.Parameters.Add("nombre", OracleDbType.Varchar2).Value = cliente.NombreCompleto;
-            cmd.Parameters.Add("tel", OracleDbType.Varchar2).Value = cliente.Telefono;
-            cmd.Parameters.Add("correo", OracleDbType.Varchar2).Value = cliente.Correo ?? (object)DBNull.Value;
-            cmd.Parameters.Add("chatId", OracleDbType.Varchar2).Value = cliente.ChatId ?? (object)DBNull.Value;
-            cmd.Parameters.Add("medRecurrente", OracleDbType.Varchar2).Value = cliente.MedicamentoRecurrente ?? (object)DBNull.Value;
+            cmd.Parameters.Add("p_documento", OracleDbType.Varchar2).Value = cliente.Documento;
+            cmd.Parameters.Add("p_nombre_completo", OracleDbType.Varchar2).Value = cliente.NombreCompleto;
+            cmd.Parameters.Add("p_telefono", OracleDbType.Varchar2).Value = cliente.Telefono;
+            cmd.Parameters.Add("p_correo", OracleDbType.Varchar2).Value = cliente.Correo ?? (object)DBNull.Value;
+            cmd.Parameters.Add("p_chat_id", OracleDbType.Varchar2).Value = cliente.ChatId ?? (object)DBNull.Value;
+            cmd.Parameters.Add("p_medicamento_recurrente", OracleDbType.Varchar2).Value = cliente.MedicamentoRecurrente ?? (object)DBNull.Value;
         });
     }
 
     public void Actualizar(Cliente cliente)
     {
-        const string sql = @"
-            UPDATE CLIENTE 
-            SET NOMBRE_COMPLETO = :nombre, TELEFONO = :tel, CORREO = :correo,
-                CHAT_ID = :chatId, MEDICAMENTO_RECURRENTE = :medRecurrente
-            WHERE ID = :id";
-
-        EjecutarComando(sql, cmd =>
+        EjecutarProcedimiento("SP_ACTUALIZAR_CLIENTE", cmd =>
         {
-            cmd.Parameters.Add("id", OracleDbType.Int32).Value = cliente.Id;
-            cmd.Parameters.Add("nombre", OracleDbType.Varchar2).Value = cliente.NombreCompleto;
-            cmd.Parameters.Add("tel", OracleDbType.Varchar2).Value = cliente.Telefono;
-            cmd.Parameters.Add("correo", OracleDbType.Varchar2).Value = cliente.Correo ?? (object)DBNull.Value;
-            cmd.Parameters.Add("chatId", OracleDbType.Varchar2).Value = cliente.ChatId ?? (object)DBNull.Value;
-            cmd.Parameters.Add("medRecurrente", OracleDbType.Varchar2).Value = cliente.MedicamentoRecurrente ?? (object)DBNull.Value;
+            cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = cliente.Id;
+            cmd.Parameters.Add("p_nombre_completo", OracleDbType.Varchar2).Value = cliente.NombreCompleto;
+            cmd.Parameters.Add("p_telefono", OracleDbType.Varchar2).Value = cliente.Telefono;
+            cmd.Parameters.Add("p_correo", OracleDbType.Varchar2).Value = cliente.Correo ?? (object)DBNull.Value;
+            cmd.Parameters.Add("p_chat_id", OracleDbType.Varchar2).Value = cliente.ChatId ?? (object)DBNull.Value;
+            cmd.Parameters.Add("p_medicamento_recurrente", OracleDbType.Varchar2).Value = cliente.MedicamentoRecurrente ?? (object)DBNull.Value;
         });
     }
 
@@ -111,5 +85,10 @@ public class ClienteRepository : BaseRepository, IClienteRepository
             Activo = LeerBooleano(reader, "ACTIVO"),
             FechaCreacion = reader.GetDateTime(reader.GetOrdinal("FECHA_CREACION"))
         };
+    }
+
+    IEnumerable<Cliente> IClienteDAO.ObtenerTodosFidelizacion()
+    {
+        return ObtenerTodosFidelizacion();
     }
 }
