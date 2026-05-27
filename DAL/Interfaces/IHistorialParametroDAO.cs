@@ -8,7 +8,7 @@ namespace DAL.Interfaces;
 /// <summary>
 /// Contrato para operaciones de acceso a datos de la entidad HistorialParametro.
 /// </summary>
-public interface IHistorialParametroRepository
+public interface IHistorialParametroDAO
 {
     void Insertar(HistorialParametro historial);
     List<HistorialParametro> ObtenerPorParametro(string clave);

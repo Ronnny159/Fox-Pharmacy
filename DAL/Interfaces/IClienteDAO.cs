@@ -8,7 +8,7 @@ namespace DAL.Interfaces;
 /// <summary>
 /// Contrato para operaciones de acceso a datos de la entidad Cliente.
 /// </summary>
-public interface IClienteRepository
+public interface IClienteDAO
 {
     Cliente? ObtenerPorDocumento(string documento);
     Cliente? ObtenerPorId(int id);

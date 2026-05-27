@@ -2,18 +2,19 @@ using Oracle.ManagedDataAccess.Client;
 using DAL.Core;
 using System.Data;
 
-namespace DAL.Repositories;
+namespace DAL.DAO;
 
 /// <summary>
-/// Clase base abstracta para todos los repositorios.
-/// Proporciona métodos comunes de ejecución de comandos y consultas.
+/// Clase base abstracta para todos los DAO.
+/// Proporciona métodos comunes para llamar procedimientos almacenados
+/// y mapear cursores de salida. CERO SQL en C#.
 /// Principio aplicado: DRY, Template Method (GRASP).
 /// </summary>
-public abstract class BaseRepository
+public abstract class BaseDAO
 {
     protected readonly IOracleConnectionFactory _conexionFactory;
 
-    protected BaseRepository(IOracleConnectionFactory conexionFactory)
+    protected BaseDAO(IOracleConnectionFactory conexionFactory)
     {
         _conexionFactory = conexionFactory;
     }
@@ -24,17 +25,6 @@ public abstract class BaseRepository
     protected OracleConnection ObtenerConexion()
     {
         return _conexionFactory.CrearConexion();
-    }
-
-    /// <summary>
-    /// Ejecuta un comando SQL sin retorno de datos (INSERT, UPDATE, DELETE).
-    /// </summary>
-    protected void EjecutarComando(string sql, Action<OracleCommand> configurarParametros)
-    {
-        using var conexion = ObtenerConexion();
-        using var comando = new OracleCommand(sql, conexion);
-        configurarParametros(comando);
-        comando.ExecuteNonQuery();
     }
 
     /// <summary>
@@ -50,36 +40,16 @@ public abstract class BaseRepository
     }
 
     /// <summary>
-    /// Ejecuta una consulta que retorna un único registro.
+    /// Ejecuta un procedimiento almacenado que retorna un cursor.
     /// </summary>
-    protected T? EjecutarConsulta<T>(string sql,
-        Action<OracleCommand> configurarParametros,
-        Func<OracleDataReader, T> mapearResultado)
+    protected void EjecutarCursor(string nombreProcedimiento, Action<OracleCommand> configurarParametros, Action<OracleDataReader> procesarCursor)
     {
         using var conexion = ObtenerConexion();
-        using var comando = new OracleCommand(sql, conexion);
+        using var comando = new OracleCommand(nombreProcedimiento, conexion);
+        comando.CommandType = CommandType.StoredProcedure;
         configurarParametros(comando);
         using var reader = comando.ExecuteReader();
-        if (reader.Read())
-            return mapearResultado(reader);
-        return default;
-    }
-
-    /// <summary>
-    /// Ejecuta una consulta que retorna múltiples registros.
-    /// </summary>
-    protected List<T> EjecutarConsultaLista<T>(string sql,
-        Action<OracleCommand> configurarParametros,
-        Func<OracleDataReader, T> mapearResultado)
-    {
-        var lista = new List<T>();
-        using var conexion = ObtenerConexion();
-        using var comando = new OracleCommand(sql, conexion);
-        configurarParametros(comando);
-        using var reader = comando.ExecuteReader();
-        while (reader.Read())
-            lista.Add(mapearResultado(reader));
-        return lista;
+        procesarCursor(reader);
     }
 
     /// <summary>

@@ -8,7 +8,7 @@ namespace DAL.Interfaces;
 /// <summary>
 /// Contrato para operaciones de acceso a datos de la entidad HistorialDescuentoProducto.
 /// </summary>
-public interface IHistorialDescuentoProductoRepository
+public interface IHistorialDescuentoProductoDAO
 {
     void Insertar(HistorialDescuentoProducto historial);
     List<HistorialDescuentoProducto> ObtenerPorProducto(int productoId);

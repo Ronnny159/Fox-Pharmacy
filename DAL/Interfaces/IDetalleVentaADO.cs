@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace DAL.Interfaces;
 
 /// <summary>
-/// Contrato para operaciones de acceso a datos de la entidad DetalleVenta.
+/// Contrato para operaciones de acceso a datos de DetalleVenta.
 /// </summary>
-public interface IDetalleVentaRepository
+public interface IDetalleVentaDAO
 {
     List<DetalleVenta> ObtenerPorVenta(int ventaId);
     List<DetalleVenta> ObtenerPorLote(int loteId);

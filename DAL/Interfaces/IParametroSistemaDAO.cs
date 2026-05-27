@@ -8,7 +8,7 @@ namespace DAL.Interfaces;
 /// <summary>
 /// Contrato para operaciones de acceso a datos de la entidad ParametroSistema.
 /// </summary>
-public interface IParametroSistemaRepository
+public interface IParametroSistemaDAO
 {
     ParametroSistema? ObtenerPorClave(string clave);
     IEnumerable<ParametroSistema> ObtenerTodos();

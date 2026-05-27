@@ -9,7 +9,7 @@ namespace DAL.Interfaces;
 /// <summary>
 /// Contrato para operaciones de acceso a datos de la entidad Usuario.
 /// </summary>
-public interface IUsuarioRepository
+public interface IUsuarioDAO
 {
     Task<Usuario?> ObtenerPorCredencialesAsync(string nombreUsuario, string hashContrasena);
     Usuario? ObtenerPorId(int id);
