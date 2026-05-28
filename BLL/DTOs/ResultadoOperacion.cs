@@ -7,6 +7,7 @@ namespace BLL.DTOs;
 /// Evita excepciones no controladas hacia la UI.
 /// Principio aplicado: Separación de responsabilidades.
 /// </summary>
+
 public class ResultadoOperacion
 {
     public bool Exitoso { get; set; }
