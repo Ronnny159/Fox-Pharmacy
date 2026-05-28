@@ -31,7 +31,7 @@
             gridProductos = new System.Windows.Forms.DataGridView();
             lblAgregarProductos = new System.Windows.Forms.Label();
             textBox1 = new System.Windows.Forms.TextBox();
-            lblTituloTabla = new System.Windows.Forms.Label();
+            lblTablaProductos = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             textBox2 = new System.Windows.Forms.TextBox();
@@ -79,16 +79,16 @@
             textBox1.Size = new System.Drawing.Size(186, 25);
             textBox1.TabIndex = 2;
             // 
-            // lblTituloTabla
+            // lblTablaProductos
             // 
-            lblTituloTabla.AutoSize = true;
-            lblTituloTabla.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            lblTituloTabla.Location = new System.Drawing.Point(370, 22);
-            lblTituloTabla.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            lblTituloTabla.Name = "lblTituloTabla";
-            lblTituloTabla.Size = new System.Drawing.Size(128, 17);
-            lblTituloTabla.TabIndex = 3;
-            lblTituloTabla.Text = "Productos Existentes";
+            lblTablaProductos.AutoSize = true;
+            lblTablaProductos.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            lblTablaProductos.Location = new System.Drawing.Point(370, 22);
+            lblTablaProductos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lblTablaProductos.Name = "lblTablaProductos";
+            lblTablaProductos.Size = new System.Drawing.Size(128, 17);
+            lblTablaProductos.TabIndex = 3;
+            lblTablaProductos.Text = "Productos Existentes";
             // 
             // label3
             // 
@@ -225,7 +225,8 @@
             // 
             btnBuscarPorCodigo.FlatAppearance.BorderSize = 0;
             btnBuscarPorCodigo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnBuscarPorCodigo.Location = new System.Drawing.Point(261, 400);
+            btnBuscarPorCodigo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            btnBuscarPorCodigo.Location = new System.Drawing.Point(261, 397);
             btnBuscarPorCodigo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnBuscarPorCodigo.Name = "btnBuscarPorCodigo";
             btnBuscarPorCodigo.Size = new System.Drawing.Size(88, 27);
@@ -274,7 +275,7 @@
             Controls.Add(label4);
             Controls.Add(textBox2);
             Controls.Add(label3);
-            Controls.Add(lblTituloTabla);
+            Controls.Add(lblTablaProductos);
             Controls.Add(textBox1);
             Controls.Add(lblAgregarProductos);
             Controls.Add(gridProductos);
@@ -292,7 +293,7 @@
         private System.Windows.Forms.DataGridView gridProductos;
         private System.Windows.Forms.Label lblAgregarProductos;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label lblTituloTabla;
+        private System.Windows.Forms.Label lblTablaProductos;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox2;

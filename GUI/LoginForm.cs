@@ -14,7 +14,7 @@ namespace GUI
 {
     public partial class LoginForm : Form
     {
-        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IUsuarioDAO _usuarioDAO;
 
         public LoginForm()
         {
@@ -57,6 +57,7 @@ namespace GUI
         private void btnRegistrarse_Click(object sender, EventArgs e)
         {
             panelRegistrarse.Visible = true;
+
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)

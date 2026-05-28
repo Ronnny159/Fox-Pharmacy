@@ -36,11 +36,9 @@ namespace GUI
             btnEliminarProductos.BackColor = Colores.ColorPrimario;
             btnBuscarPorCodigo.BackColor = Colores.ColorPrimario;
             lblAgregarProductos.ForeColor = Colores.ColorSecundario;
-            lblTituloTabla.ForeColor = Colores.ColorSecundario;
+            lblTablaProductos.ForeColor = Colores.ColorSecundario;
             lblBuscarPorId.ForeColor = Colores.ColorSecundario;
-            // Aqui asignale a cada cosa que le vayas a cambiar el color, el color que quieras, por ejemplo:
-            // lable5.ForeColor = Colores.ColorPrimario;
-            //
+            
         }
 
         private void btnDetallesProducto_Click(object sender, EventArgs e)
