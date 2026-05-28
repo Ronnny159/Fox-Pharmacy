@@ -86,4 +86,14 @@ public class UsuarioDAO : BaseDAO, IUsuarioDAO
             FechaCreacion = reader.GetDateTime(reader.GetOrdinal("FECHA_CREACION"))
         };
     }
+
+    public async Task<Usuario?> ObtenerPorCredencialesAsync(string nombreUsuario, string hashContrasena)
+    {
+        return await Task.Run(() => ObtenerPorCredenciales(nombreUsuario, hashContrasena));
+    }
+
+    IEnumerable<Usuario> IUsuarioDAO.ObtenerTodos()
+    {
+        return ObtenerTodos();
+    }
 }
