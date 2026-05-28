@@ -1,15 +1,9 @@
 using BLL.DTOs;
 using BLL.Interfaces;
 using DAL.Interfaces;
-using Entity;
+using Entities;
 
 namespace BLL.Services;
-
-/// <summary>
-/// Lógica de negocio para la gestión del catálogo maestro de productos.
-/// Aplica validaciones de integridad, previene duplicados y protege
-/// la eliminación de productos con lotes activos en inventario.
-/// </summary>
 
 public class ProductoService : IProductoService
 {

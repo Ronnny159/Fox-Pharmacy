@@ -1,17 +1,9 @@
 using BLL.DTOs;
 using BLL.Interfaces;
 using DAL.Interfaces;
-using Entity;
+using Entities;
 
 namespace BLL.Services;
-
-/// <summary>
-/// Lógica de negocio para el proceso de ventas y facturación.
-/// Orquesta FEFO, cálculo de descuentos, construcción de detalles,
-/// actualización de stock y anulación de ventas con reversión de inventario.
-/// Es el servicio más crítico del sistema: coordina múltiples repositorios
-/// en una única operación atómica delegada al repositorio de ventas.
-/// </summary>
 
 public class VentaService : IVentaService
 {

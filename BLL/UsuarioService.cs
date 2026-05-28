@@ -6,12 +6,6 @@ using System.Text;
 
 namespace BLL.Services;
 
-/// <summary>
-/// Lógica de negocio para autenticación y gestión de usuarios del sistema.
-/// Nunca expone contraseñas ni hashes hacia la UI.
-/// El hash de contraseñas se calcula en esta capa antes de consultar la BD.
-/// </summary>
-
 public class UsuarioService : IUsuarioService
 {
     private readonly IUsuarioDAO _usuarioDAO;

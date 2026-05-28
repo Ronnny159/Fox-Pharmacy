@@ -1,360 +1,152 @@
 using BLL.DTOs;
 using BLL.Interfaces;
-using DAL.DAO;
 using DAL.Interfaces;
 using Entity;
 
 namespace BLL.Services;
 
-/// <summary>
-/// Lógica de negocio para la gestión de lotes de inventario.
-/// Orquesta el algoritmo FEFO, el control de stock, la detección
-/// de inflación de precios y la aplicación de descuentos por
-/// proximidad de vencimiento.
-/// </summary>
 public class LoteService : ILoteService
 {
     private readonly ILoteDAO _loteDAO;
     private readonly IProductoDAO _productoDAO;
     private readonly IParametroService _parametroService;
 
-    public LoteService(
-        ILoteDAO loteDAO,
-        IProductoDAO productoDAO,
-        IParametroService parametroService)
+    public LoteService(ILoteDAO loteDAO, IProductoDAO productoDAO, IParametroService parametroService)
     {
         _loteDAO = loteDAO;
         _productoDAO = productoDAO;
         _parametroService = parametroService;
     }
 
-    /// <summary>
-    /// Obtiene un lote por su identificador interno.
-    /// </summary>
     public ResultadoOperacion ObtenerPorId(int id)
     {
         try
         {
-            if (id <= 0)
-                return ResultadoOperacion.Fallo("El identificador del lote no es válido.");
-
+            if (id <= 0) return ResultadoOperacion.Fallo("ID no válido.");
             var lote = _loteDAO.ObtenerPorId(id);
-
-            if (lote is null)
-                return ResultadoOperacion.Fallo($"No se encontró ningún lote con el ID {id}.");
-
-            return ResultadoOperacion.Exito(
-                $"Lote '{lote.CodigoLote}' encontrado.",
-                lote);
+            if (lote is null) return ResultadoOperacion.Fallo($"Lote con ID {id} no encontrado.");
+            return ResultadoOperacion.Exito($"Lote '{lote.CodigoLote}' encontrado.", lote);
         }
-        catch (Exception ex)
-        {
-            return ResultadoOperacion.Fallo(ex);
-        }
+        catch (Exception ex) { return ResultadoOperacion.Fallo(ex); }
     }
 
-    /// <summary>
-    /// Obtiene todos los lotes activos pertenecientes a un producto,
-    /// ordenados por fecha de vencimiento ascendente (FEFO visual).
-    /// </summary>
     public ResultadoOperacion ObtenerPorProducto(int productoId)
     {
         try
         {
-            if (productoId <= 0)
-                return ResultadoOperacion.Fallo("El identificador del producto no es válido.");
-
+            if (productoId <= 0) return ResultadoOperacion.Fallo("ID de producto no válido.");
             var producto = _productoDAO.ObtenerPorId(productoId);
-            if (producto is null)
-                return ResultadoOperacion.Fallo(
-                    $"No se encontró ningún producto con el ID {productoId}.");
+            if (producto is null) return ResultadoOperacion.Fallo($"Producto con ID {productoId} no encontrado.");
 
-            var lotes = _loteDAO.ObtenerPorProducto(productoId).ToList();
-
-            if (lotes.Count == 0)
-                return ResultadoOperacion.Exito(
-                    $"El producto '{producto.Nombre}' no tiene lotes activos registrados.",
-                    new List<object>());
+            var lotes = _loteDAO.ObtenerPorProducto(productoId);
+            if (lotes.Count == 0) return ResultadoOperacion.Exito($"'{producto.Nombre}' no tiene lotes activos.", new List<object>());
 
             int diasVentana = _parametroService.ObtenerDiasVentanaCritica();
-
             var resultado = lotes.Select(l => new
             {
-                l.Id,
-                l.CodigoLote,
-                l.ProductoId,
-                NombreProducto = producto.Nombre,
+                l.IdLote, l.CodigoLote, l.IdProducto, NombreProducto = producto.Nombre,
                 FechaFabricacion = l.FechaFabricacion.ToString("yyyy-MM-dd"),
                 FechaVencimiento = l.FechaVencimiento.ToString("yyyy-MM-dd"),
-                l.DiasParaVencimiento,
-                l.CantidadActual,
-                l.CantidadInicial,
-                l.PrecioCompra,
-                l.PrecioVenta,
-                Estado = l.Estado.ToString(),
-                EnVentanaCritica = l.EstaEnVentanaCritica(diasVentana),
-                EstaVencido = l.EstaVencido
+                l.DiasParaVencimiento, l.CantidadActual, l.CantidadInicial,
+                l.PrecioCompra, l.PrecioVenta, Estado = l.Estado,
+                EnVentanaCritica = l.EstaEnVentanaCritica(diasVentana), l.EstaVencido
             }).ToList();
 
-            return ResultadoOperacion.Exito(
-                $"Se encontraron {resultado.Count} lote(s) para el producto '{producto.Nombre}'.",
-                resultado);
+            return ResultadoOperacion.Exito($"{resultado.Count} lote(s) para '{producto.Nombre}'.", resultado);
         }
-        catch (Exception ex)
-        {
-            return ResultadoOperacion.Fallo(ex);
-        }
+        catch (Exception ex) { return ResultadoOperacion.Fallo(ex); }
     }
 
-    /// <summary>
-    /// Obtiene todos los lotes con estado Activo en el sistema,
-    /// enriquecidos con indicadores de ventana crítica.
-    /// </summary>
     public ResultadoOperacion ObtenerTodosActivos()
     {
         try
         {
-            var lotes = _loteDAO.ObtenerTodosActivos().ToList();
-
-            if (lotes.Count == 0)
-                return ResultadoOperacion.Exito(
-                    "No hay lotes activos registrados en el sistema.",
-                    new List<object>());
-
+            var lotes = _loteDAO.ObtenerTodosActivos();
+            if (lotes.Count == 0) return ResultadoOperacion.Exito("No hay lotes activos.", new List<object>());
             int diasVentana = _parametroService.ObtenerDiasVentanaCritica();
-
             var resultado = lotes.Select(l => new
             {
-                l.Id,
-                l.CodigoLote,
-                l.ProductoId,
+                l.IdLote, l.CodigoLote, l.IdProducto,
                 FechaVencimiento = l.FechaVencimiento.ToString("yyyy-MM-dd"),
-                l.DiasParaVencimiento,
-                l.CantidadActual,
-                l.PrecioCompra,
-                l.PrecioVenta,
-                Estado = l.Estado.ToString(),
-                EnVentanaCritica = l.EstaEnVentanaCritica(diasVentana)
+                l.DiasParaVencimiento, l.CantidadActual, l.PrecioCompra, l.PrecioVenta,
+                Estado = l.Estado, EnVentanaCritica = l.EstaEnVentanaCritica(diasVentana)
             }).ToList();
-
-            return ResultadoOperacion.Exito(
-                $"Se encontraron {resultado.Count} lote(s) activos.",
-                resultado);
+            return ResultadoOperacion.Exito($"{resultado.Count} lote(s) activos.", resultado);
         }
-        catch (Exception ex)
-        {
-            return ResultadoOperacion.Fallo(ex);
-        }
+        catch (Exception ex) { return ResultadoOperacion.Fallo(ex); }
     }
 
-    /// <summary>
-    /// Ejecuta el algoritmo FEFO para un producto:
-    /// selecciona el lote activo con la fecha de vencimiento más próxima.
-    /// Criterio de desempate: menor precio de compra.
-    /// También calcula el precio de venta efectivo aplicando el descuento
-    /// por proximidad de vencimiento si el lote está en ventana crítica.
-    /// </summary>
     public ResultadoOperacion SeleccionarFEFO(int productoId)
     {
         try
         {
-            if (productoId <= 0)
-                return ResultadoOperacion.Fallo("El identificador del producto no es válido.");
-
+            if (productoId <= 0) return ResultadoOperacion.Fallo("ID de producto no válido.");
             var lote = _loteDAO.SeleccionarLoteFEFO(productoId);
-
-            if (lote is null)
-                return ResultadoOperacion.Fallo(
-                    $"No hay lotes activos disponibles para el producto {productoId}. " +
-                    "Verifique el inventario.");
+            if (lote is null) return ResultadoOperacion.Fallo($"No hay lotes activos para el producto {productoId}.");
 
             int diasVentana = _parametroService.ObtenerDiasVentanaCritica();
             bool enVentanaCritica = lote.EstaEnVentanaCritica(diasVentana);
-
-            // Calcular descuento aplicable según configuración del sistema
             decimal porcentajeDescuento = 0m;
             decimal precioEfectivo = lote.PrecioVenta;
 
             if (enVentanaCritica)
             {
                 var producto = _productoDAO.ObtenerPorId(productoId);
-
-                // Usar descuento personalizado del producto si existe, si no el general
-                porcentajeDescuento = producto?.UsaDescuentoPersonalizado == true
-                    ? producto.DescuentoProximidadVencimiento!.Value
-                    : _parametroService.ObtenerPorcentajeDescuentoVencimiento();
-
+                porcentajeDescuento = producto?.UsaDescuentoPersonalizado == true ? producto.DescuentoProximidadVencimiento!.Value : _parametroService.ObtenerPorcentajeDescuentoVencimiento();
                 precioEfectivo = Math.Round(lote.PrecioVenta * (1 - porcentajeDescuento), 2);
             }
 
             var resultado = new
             {
-                LoteId = lote.Id,
-                lote.CodigoLote,
-                lote.ProductoId,
+                LoteId = lote.IdLote, lote.CodigoLote, lote.IdProducto,
                 FechaVencimiento = lote.FechaVencimiento.ToString("yyyy-MM-dd"),
-                lote.DiasParaVencimiento,
-                lote.CantidadActual,
-                PrecioVentaOriginal = lote.PrecioVenta,
-                PorcentajeDescuento = porcentajeDescuento,
+                lote.DiasParaVencimiento, lote.CantidadActual,
+                PrecioVentaOriginal = lote.PrecioVenta, PorcentajeDescuento = porcentajeDescuento,
                 DescuentoUnitario = Math.Round(lote.PrecioVenta - precioEfectivo, 2),
-                PrecioEfectivo = precioEfectivo,
-                EnVentanaCritica = enVentanaCritica,
-                MensajeDescuento = enVentanaCritica
-                    ? $"Descuento del {porcentajeDescuento:P0} por proximidad de vencimiento aplicado."
-                    : "Sin descuento por vencimiento."
+                PrecioEfectivo = precioEfectivo, EnVentanaCritica = enVentanaCritica,
+                MensajeDescuento = enVentanaCritica ? $"Descuento del {porcentajeDescuento:P0} aplicado." : "Sin descuento."
             };
 
-            return ResultadoOperacion.Exito(
-                $"Lote FEFO seleccionado: '{lote.CodigoLote}' " +
-                $"(vence {lote.DiasParaVencimiento} días).",
-                resultado);
+            return ResultadoOperacion.Exito($"Lote FEFO: '{lote.CodigoLote}' (vence en {lote.DiasParaVencimiento} días).", resultado);
         }
-        catch (Exception ex)
-        {
-            return ResultadoOperacion.Fallo(ex);
-        }
+        catch (Exception ex) { return ResultadoOperacion.Fallo(ex); }
     }
 
-    /// <summary>
-    /// Registra un nuevo lote en el inventario.
-    /// Valida la integridad de los datos, verifica que el producto exista
-    /// y detecta automáticamente si hubo un aumento de precio respecto
-    /// al lote anterior del mismo producto (alerta de inflación).
-    /// </summary>
     public ResultadoOperacion InsertarLote(Lote lote)
     {
         try
         {
-            if (lote is null)
-                return ResultadoOperacion.Fallo("Los datos del lote son obligatorios.");
+            if (lote is null) return ResultadoOperacion.Fallo("Datos obligatorios.");
+            if (string.IsNullOrWhiteSpace(lote.CodigoLote)) return ResultadoOperacion.Fallo("Código de lote obligatorio.");
+            if (lote.IdProducto <= 0) return ResultadoOperacion.Fallo("Producto no válido.");
+            if (lote.FechaVencimiento <= DateTime.Today) return ResultadoOperacion.Fallo("Fecha de vencimiento debe ser posterior a hoy.");
+            if (lote.FechaFabricacion >= lote.FechaVencimiento) return ResultadoOperacion.Fallo("Fecha de fabricación debe ser anterior al vencimiento.");
+            if (lote.PrecioCompra <= 0) return ResultadoOperacion.Fallo("Precio de compra debe ser mayor a cero.");
+            if (lote.PrecioVenta <= 0) return ResultadoOperacion.Fallo("Precio de venta debe ser mayor a cero.");
+            if (lote.PrecioVenta <= lote.PrecioCompra) return ResultadoOperacion.Fallo("Precio de venta debe ser mayor al de compra.");
 
-            if (string.IsNullOrWhiteSpace(lote.CodigoLote))
-                return ResultadoOperacion.Fallo("El código de lote es obligatorio.");
-
-            if (lote.ProductoId <= 0)
-                return ResultadoOperacion.Fallo("Debe asociar el lote a un producto válido.");
-
-            if (lote.FechaVencimiento <= DateTime.Today)
-                return ResultadoOperacion.Fallo(
-                    "La fecha de vencimiento debe ser posterior a la fecha actual.");
-
-            if (lote.FechaFabricacion >= lote.FechaVencimiento)
-                return ResultadoOperacion.Fallo(
-                    "La fecha de fabricación debe ser anterior a la fecha de vencimiento.");
-
-            if (lote.PrecioCompra <= 0)
-                return ResultadoOperacion.Fallo("El precio de compra debe ser mayor a cero.");
-
-            if (lote.PrecioVenta <= 0)
-                return ResultadoOperacion.Fallo("El precio de venta debe ser mayor a cero.");
-
-            if (lote.PrecioVenta <= lote.PrecioCompra)
-                return ResultadoOperacion.Fallo(
-                    "El precio de venta debe ser mayor al precio de compra para garantizar margen positivo.");
-
-            // Verificar que el producto exista
-            var producto = _productoDAO.ObtenerPorId(lote.ProductoId);
-            if (producto is null)
-                return ResultadoOperacion.Fallo(
-                    $"No se encontró ningún producto con el ID {lote.ProductoId}.");
-
-            // Detectar inflación: comparar con el precio de compra del lote más reciente
-            bool alertaInflacion = false;
-            decimal porcentajeAumento = 0m;
-            decimal precioAnterior = 0m;
-
-            var lotesExistentes = _loteDAO
-                .ObtenerPorProducto(lote.ProductoId)
-                .OrderByDescending(l => l.FechaCreacion)
-                .ToList();
-
-            if (lotesExistentes.Count > 0)
-            {
-                var loteAnterior = lotesExistentes.First();
-                precioAnterior = loteAnterior.PrecioCompra;
-
-                if (lote.PrecioCompra > precioAnterior && precioAnterior > 0)
-                {
-                    alertaInflacion = true;
-                    porcentajeAumento = Math.Round(
-                        ((lote.PrecioCompra - precioAnterior) / precioAnterior) * 100, 2);
-                }
-            }
+            var producto = _productoDAO.ObtenerPorId(lote.IdProducto);
+            if (producto is null) return ResultadoOperacion.Fallo($"Producto con ID {lote.IdProducto} no encontrado.");
 
             _loteDAO.Insertar(lote);
-
-            var mensajeBase = $"Lote '{lote.CodigoLote}' registrado correctamente " +
-                              $"para el producto '{producto.Nombre}'.";
-
-            var datos = new
-            {
-                lote.CodigoLote,
-                lote.ProductoId,
-                NombreProducto = producto.Nombre,
-                FechaVencimiento = lote.FechaVencimiento.ToString("yyyy-MM-dd"),
-                lote.PrecioCompra,
-                lote.PrecioVenta,
-                AlertaInflacion = alertaInflacion,
-                PrecioAnterior = precioAnterior,
-                PorcentajeAumento = porcentajeAumento,
-                MensajeInflacion = alertaInflacion
-                    ? $"ALERTA: El precio de compra aumentó un {porcentajeAumento}% " +
-                      $"respecto al lote anterior (${precioAnterior:F2} → ${lote.PrecioCompra:F2})."
-                    : string.Empty
-            };
-
-            var mensajeFinal = alertaInflacion
-                ? mensajeBase + $" {datos.MensajeInflacion}"
-                : mensajeBase;
-
-            return ResultadoOperacion.Exito(mensajeFinal, datos);
+            return ResultadoOperacion.Exito($"Lote '{lote.CodigoLote}' registrado para '{producto.Nombre}'.", lote);
         }
-        catch (Exception ex)
-        {
-            return ResultadoOperacion.Fallo(ex);
-        }
+        catch (Exception ex) { return ResultadoOperacion.Fallo(ex); }
     }
 
-    /// <summary>
-    /// Actualiza el stock y el estado de un lote existente.
-    /// Usado internamente por el proceso de venta y ajustes de inventario.
-    /// </summary>
     public ResultadoOperacion ActualizarStock(int loteId, int cantidad, EstadoLote estado)
     {
         try
         {
-            if (loteId <= 0)
-                return ResultadoOperacion.Fallo("El identificador del lote no es válido.");
-
-            if (cantidad < 0)
-                return ResultadoOperacion.Fallo(
-                    "La cantidad no puede ser negativa.");
+            if (loteId <= 0) return ResultadoOperacion.Fallo("ID de lote no válido.");
+            if (cantidad < 0) return ResultadoOperacion.Fallo("Cantidad no puede ser negativa.");
 
             var lote = _loteDAO.ObtenerPorId(loteId);
-            if (lote is null)
-                return ResultadoOperacion.Fallo(
-                    $"No se encontró ningún lote con el ID {loteId}.");
+            if (lote is null) return ResultadoOperacion.Fallo($"Lote con ID {loteId} no encontrado.");
 
-            // Si la cantidad llega a cero, forzar estado Agotado
-            var estadoFinal = cantidad == 0 ? EstadoLote.Agotado : estado;
-
-            _loteDAO.ActualizarStock(loteId, cantidad, estadoFinal);
-
-            return ResultadoOperacion.Exito(
-                $"Stock del lote '{lote.CodigoLote}' actualizado a {cantidad} unidades. " +
-                $"Estado: {estadoFinal}.",
-                new
-                {
-                    LoteId = loteId,
-                    lote.CodigoLote,
-                    NuevaCantidad = cantidad,
-                    NuevoEstado = estadoFinal.ToString()
-                });
+            _loteDAO.ActualizarStock(loteId, cantidad, estado);
+            return ResultadoOperacion.Exito($"Stock del lote '{lote.CodigoLote}' actualizado a {cantidad}. Estado: {estado}.", new { LoteId = loteId, lote.CodigoLote, NuevaCantidad = cantidad, NuevoEstado = estado.ToString() });
         }
-        catch (Exception ex)
-        {
-            return ResultadoOperacion.Fallo(ex);
-        }
+        catch (Exception ex) { return ResultadoOperacion.Fallo(ex); }
     }
 }

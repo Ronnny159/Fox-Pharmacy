@@ -1,17 +1,9 @@
 using BLL.DTOs;
 using BLL.Interfaces;
 using DAL.Interfaces;
-using Entity;
+using Entities;
 
 namespace BLL.Services;
-
-/// <summary>
-/// Lógica de negocio para la gestión de parámetros de configuración del sistema.
-/// Centraliza el acceso a los valores clave que controlan el comportamiento
-/// del sistema (descuentos, umbrales, ventanas críticas) y garantiza
-/// la trazabilidad de cada cambio mediante historial de auditoría.
-/// Principio aplicado: Open/Closed — el sistema se adapta sin recompilar.
-/// </summary>
 
 public class ParametroService : IParametroService
 {
