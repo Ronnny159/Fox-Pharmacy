@@ -1,7 +1,7 @@
+using Oracle.ManagedDataAccess.Client;
 using DAL.Core;
 using DAL.Interfaces;
 using Entity;
-using Oracle.ManagedDataAccess.Client;
 
 namespace DAL.DAO;
 
@@ -13,7 +13,7 @@ public class ClienteDAO : BaseDAO, IClienteDAO
     {
         Cliente? resultado = null;
         EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_CLIENTE_POR_DOCUMENTO",
-            cmd => cmd.Parameters.Add("p_documento", OracleDbType.Varchar2).Value = documento,
+            cmd => cmd.Parameters.Add("p_doc", OracleDbType.Varchar2).Value = documento,
             reader => { if (reader.Read()) resultado = MapearCliente(reader); });
         return resultado;
     }
@@ -22,7 +22,7 @@ public class ClienteDAO : BaseDAO, IClienteDAO
     {
         Cliente? resultado = null;
         EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_CLIENTE_POR_ID",
-            cmd => cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = id,
+            cmd => cmd.Parameters.Add("p_id_cliente", OracleDbType.Int32).Value = id,
             reader => { if (reader.Read()) resultado = MapearCliente(reader); });
         return resultado;
     }
@@ -31,7 +31,7 @@ public class ClienteDAO : BaseDAO, IClienteDAO
     {
         Cliente? resultado = null;
         EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_CLIENTE_POR_CHAT_ID",
-            cmd => cmd.Parameters.Add("p_chat_id", OracleDbType.Varchar2).Value = chatId,
+            cmd => cmd.Parameters.Add("p_chat", OracleDbType.Varchar2).Value = chatId,
             reader => { if (reader.Read()) resultado = MapearCliente(reader); });
         return resultado;
     }
@@ -49,12 +49,12 @@ public class ClienteDAO : BaseDAO, IClienteDAO
     {
         EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.INSERTAR_CLIENTE", cmd =>
         {
-            cmd.Parameters.Add("p_documento", OracleDbType.Varchar2).Value = cliente.Documento;
-            cmd.Parameters.Add("p_nombre_completo", OracleDbType.Varchar2).Value = cliente.NombreCompleto;
-            cmd.Parameters.Add("p_telefono", OracleDbType.Varchar2).Value = cliente.Telefono;
+            cmd.Parameters.Add("p_doc", OracleDbType.Varchar2).Value = cliente.Documento;
+            cmd.Parameters.Add("p_nombre", OracleDbType.Varchar2).Value = cliente.NombreCompleto;
+            cmd.Parameters.Add("p_tel", OracleDbType.Varchar2).Value = cliente.Telefono;
             cmd.Parameters.Add("p_correo", OracleDbType.Varchar2).Value = cliente.Correo ?? (object)DBNull.Value;
-            cmd.Parameters.Add("p_chat_id", OracleDbType.Varchar2).Value = cliente.ChatId ?? (object)DBNull.Value;
-            cmd.Parameters.Add("p_medicamento_recurrente", OracleDbType.Varchar2).Value = cliente.MedicamentoRecurrente ?? (object)DBNull.Value;
+            cmd.Parameters.Add("p_chat", OracleDbType.Varchar2).Value = cliente.ChatId ?? (object)DBNull.Value;
+            cmd.Parameters.Add("p_med", OracleDbType.Varchar2).Value = cliente.MedicamentoRecurrente ?? (object)DBNull.Value;
         });
     }
 
@@ -62,12 +62,12 @@ public class ClienteDAO : BaseDAO, IClienteDAO
     {
         EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.ACTUALIZAR_CLIENTE", cmd =>
         {
-            cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = cliente.Id;
-            cmd.Parameters.Add("p_nombre_completo", OracleDbType.Varchar2).Value = cliente.NombreCompleto;
-            cmd.Parameters.Add("p_telefono", OracleDbType.Varchar2).Value = cliente.Telefono;
+            cmd.Parameters.Add("p_id_cliente", OracleDbType.Int32).Value = cliente.IdCliente;
+            cmd.Parameters.Add("p_nombre", OracleDbType.Varchar2).Value = cliente.NombreCompleto;
+            cmd.Parameters.Add("p_tel", OracleDbType.Varchar2).Value = cliente.Telefono;
             cmd.Parameters.Add("p_correo", OracleDbType.Varchar2).Value = cliente.Correo ?? (object)DBNull.Value;
-            cmd.Parameters.Add("p_chat_id", OracleDbType.Varchar2).Value = cliente.ChatId ?? (object)DBNull.Value;
-            cmd.Parameters.Add("p_medicamento_recurrente", OracleDbType.Varchar2).Value = cliente.MedicamentoRecurrente ?? (object)DBNull.Value;
+            cmd.Parameters.Add("p_chat", OracleDbType.Varchar2).Value = cliente.ChatId ?? (object)DBNull.Value;
+            cmd.Parameters.Add("p_med", OracleDbType.Varchar2).Value = cliente.MedicamentoRecurrente ?? (object)DBNull.Value;
         });
     }
 
@@ -75,15 +75,14 @@ public class ClienteDAO : BaseDAO, IClienteDAO
     {
         return new Cliente
         {
-            Id = reader.GetInt32(reader.GetOrdinal("ID")),
+            IdCliente = reader.GetInt32(reader.GetOrdinal("ID_CLIENTE")),
             Documento = LeerString(reader, "DOCUMENTO"),
             NombreCompleto = LeerString(reader, "NOMBRE_COMPLETO"),
             Telefono = LeerString(reader, "TELEFONO"),
             Correo = LeerString(reader, "CORREO"),
             ChatId = LeerString(reader, "CHAT_ID"),
             MedicamentoRecurrente = LeerString(reader, "MEDICAMENTO_RECURRENTE"),
-            Activo = LeerBooleano(reader, "ACTIVO"),
-            FechaCreacion = reader.GetDateTime(reader.GetOrdinal("FECHA_CREACION"))
+            Estado = LeerChar(reader, "ESTADO")
         };
     }
 

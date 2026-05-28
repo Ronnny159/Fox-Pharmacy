@@ -2,6 +2,7 @@ using Oracle.ManagedDataAccess.Client;
 using DAL.Core;
 using DAL.Interfaces;
 using Entity;
+using System.Data;
 
 namespace DAL.DAO;
 
@@ -22,7 +23,7 @@ public class ProductoDAO : BaseDAO, IProductoDAO
     {
         Producto? resultado = null;
         EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_PRODUCTO_POR_ID",
-            cmd => cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = id,
+            cmd => cmd.Parameters.Add("p_id_producto", OracleDbType.Int32).Value = id,
             reader => { if (reader.Read()) resultado = MapearProducto(reader); });
         return resultado;
     }
@@ -52,7 +53,7 @@ public class ProductoDAO : BaseDAO, IProductoDAO
             cmd.Parameters.Add("p_codigo", OracleDbType.Varchar2).Value = producto.Codigo;
             cmd.Parameters.Add("p_nombre", OracleDbType.Varchar2).Value = producto.Nombre;
             cmd.Parameters.Add("p_descripcion", OracleDbType.Varchar2).Value = producto.Descripcion ?? (object)DBNull.Value;
-            cmd.Parameters.Add("p_es_controlado", OracleDbType.Int32).Value = producto.EsControlado ? 1 : 0;
+            cmd.Parameters.Add("p_es_controlado", OracleDbType.Char).Value = producto.EsControlado;
             cmd.Parameters.Add("p_stock_minimo", OracleDbType.Int32).Value = producto.StockMinimo;
             cmd.Parameters.Add("p_descuento", OracleDbType.Decimal).Value = (object?)producto.DescuentoProximidadVencimiento ?? DBNull.Value;
         });
@@ -62,10 +63,10 @@ public class ProductoDAO : BaseDAO, IProductoDAO
     {
         EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.ACTUALIZAR_PRODUCTO", cmd =>
         {
-            cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = producto.Id;
+            cmd.Parameters.Add("p_id_producto", OracleDbType.Int32).Value = producto.IdProducto;
             cmd.Parameters.Add("p_nombre", OracleDbType.Varchar2).Value = producto.Nombre;
             cmd.Parameters.Add("p_descripcion", OracleDbType.Varchar2).Value = producto.Descripcion ?? (object)DBNull.Value;
-            cmd.Parameters.Add("p_es_controlado", OracleDbType.Int32).Value = producto.EsControlado ? 1 : 0;
+            cmd.Parameters.Add("p_es_controlado", OracleDbType.Char).Value = producto.EsControlado;
             cmd.Parameters.Add("p_stock_minimo", OracleDbType.Int32).Value = producto.StockMinimo;
             cmd.Parameters.Add("p_descuento", OracleDbType.Decimal).Value = (object?)producto.DescuentoProximidadVencimiento ?? DBNull.Value;
         });
@@ -73,32 +74,34 @@ public class ProductoDAO : BaseDAO, IProductoDAO
 
     public void ActualizarDescuentoIndividual(int productoId, decimal? descuento)
     {
-        EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.ACTUALIZAR_DESCUENTO_INDIVIDUAL", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.ACTUALIZAR_DESCUENTO_PRODUCTO", cmd =>
         {
-            cmd.Parameters.Add("p_producto_id", OracleDbType.Int32).Value = productoId;
+            cmd.Parameters.Add("p_id_producto", OracleDbType.Int32).Value = productoId;
             cmd.Parameters.Add("p_descuento", OracleDbType.Decimal).Value = (object?)descuento ?? DBNull.Value;
+            cmd.Parameters.Add("p_id_usuario", OracleDbType.Int32).Value = 1;
+            cmd.Parameters.Add("p_motivo", OracleDbType.Varchar2).Value = "Actualización desde sistema";
+            cmd.Parameters.Add("p_ip", OracleDbType.Varchar2).Value = (object?)DBNull.Value ?? DBNull.Value;
         });
     }
 
     public void Eliminar(int id)
     {
         EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.ELIMINAR_PRODUCTO",
-            cmd => cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = id);
+            cmd => cmd.Parameters.Add("p_id_producto", OracleDbType.Int32).Value = id);
     }
 
     private Producto MapearProducto(OracleDataReader reader)
     {
         return new Producto
         {
-            Id = reader.GetInt32(reader.GetOrdinal("ID")),
+            IdProducto = reader.GetInt32(reader.GetOrdinal("ID_PRODUCTO")),
             Codigo = LeerString(reader, "CODIGO"),
             Nombre = LeerString(reader, "NOMBRE"),
             Descripcion = LeerString(reader, "DESCRIPCION"),
-            EsControlado = LeerBooleano(reader, "ES_CONTROLADO"),
+            EsControlado = LeerChar(reader, "ES_CONTROLADO"),
             StockMinimo = reader.GetInt32(reader.GetOrdinal("STOCK_MINIMO")),
             DescuentoProximidadVencimiento = LeerDecimalNulo(reader, "DESCUENTO_PROXIMIDAD_VENCIMIENTO"),
-            Activo = LeerBooleano(reader, "ACTIVO"),
-            FechaCreacion = reader.GetDateTime(reader.GetOrdinal("FECHA_CREACION"))
+            Estado = LeerChar(reader, "ESTADO")
         };
     }
 }

@@ -2,6 +2,7 @@ using Oracle.ManagedDataAccess.Client;
 using DAL.Core;
 using DAL.Interfaces;
 using Entity;
+using System.Data;
 
 namespace DAL.DAO;
 
@@ -13,7 +14,7 @@ public class LoteDAO : BaseDAO, ILoteDAO
     {
         Lote? resultado = null;
         EjecutarCursor("PKG_PHARMASMART_FEFO.OBTENER_LOTE_POR_ID",
-            cmd => cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = id,
+            cmd => cmd.Parameters.Add("p_id_lote", OracleDbType.Int32).Value = id,
             reader => { if (reader.Read()) resultado = MapearLote(reader); });
         return resultado;
     }
@@ -22,7 +23,7 @@ public class LoteDAO : BaseDAO, ILoteDAO
     {
         var lista = new List<Lote>();
         EjecutarCursor("PKG_PHARMASMART_FEFO.OBTENER_LOTES_POR_PRODUCTO",
-            cmd => cmd.Parameters.Add("p_producto_id", OracleDbType.Int32).Value = productoId,
+            cmd => cmd.Parameters.Add("p_id_producto", OracleDbType.Int32).Value = productoId,
             reader => { while (reader.Read()) lista.Add(MapearLote(reader)); });
         return lista;
     }
@@ -41,7 +42,7 @@ public class LoteDAO : BaseDAO, ILoteDAO
         EjecutarProcedimiento("PKG_PHARMASMART_FEFO.INSERTAR_LOTE", cmd =>
         {
             cmd.Parameters.Add("p_codigo_lote", OracleDbType.Varchar2).Value = lote.CodigoLote;
-            cmd.Parameters.Add("p_producto_id", OracleDbType.Int32).Value = lote.ProductoId;
+            cmd.Parameters.Add("p_id_producto", OracleDbType.Int32).Value = lote.IdProducto;
             cmd.Parameters.Add("p_fecha_fabricacion", OracleDbType.Date).Value = lote.FechaFabricacion;
             cmd.Parameters.Add("p_fecha_vencimiento", OracleDbType.Date).Value = lote.FechaVencimiento;
             cmd.Parameters.Add("p_precio_compra", OracleDbType.Decimal).Value = lote.PrecioCompra;
@@ -54,19 +55,28 @@ public class LoteDAO : BaseDAO, ILoteDAO
     {
         EjecutarProcedimiento("PKG_PHARMASMART_FEFO.ACTUALIZAR_LOTE", cmd =>
         {
-            cmd.Parameters.Add("p_id", OracleDbType.Int32).Value = lote.Id;
+            cmd.Parameters.Add("p_id_lote", OracleDbType.Int32).Value = lote.IdLote;
             cmd.Parameters.Add("p_cantidad_actual", OracleDbType.Int32).Value = lote.CantidadActual;
-            cmd.Parameters.Add("p_estado", OracleDbType.Int32).Value = (int)lote.Estado;
+            cmd.Parameters.Add("p_estado", OracleDbType.Char).Value = lote.Estado;
         });
     }
 
     public void ActualizarStock(int loteId, int nuevaCantidad, EstadoLote estado)
     {
-        EjecutarProcedimiento("PKG_PHARMASMART_FEFO.ACTUALIZAR_STOCK_LOTE", cmd =>
+        char estadoChar = estado switch
         {
-            cmd.Parameters.Add("p_lote_id", OracleDbType.Int32).Value = loteId;
-            cmd.Parameters.Add("p_nueva_cantidad", OracleDbType.Int32).Value = nuevaCantidad;
-            cmd.Parameters.Add("p_estado", OracleDbType.Int32).Value = (int)estado;
+            EstadoLote.Activo => 'A',
+            EstadoLote.Agotado => 'B',
+            EstadoLote.Vencido => 'V',
+            EstadoLote.EnCuarentena => 'C',
+            _ => 'A'
+        };
+
+        EjecutarProcedimiento("PKG_PHARMASMART_FEFO.ACTUALIZAR_STOCK", cmd =>
+        {
+            cmd.Parameters.Add("p_id_lote", OracleDbType.Int32).Value = loteId;
+            cmd.Parameters.Add("p_cantidad", OracleDbType.Int32).Value = nuevaCantidad;
+            cmd.Parameters.Add("p_estado", OracleDbType.Char).Value = estadoChar;
         });
     }
 
@@ -74,7 +84,7 @@ public class LoteDAO : BaseDAO, ILoteDAO
     {
         Lote? resultado = null;
         EjecutarCursor("PKG_PHARMASMART_FEFO.SELECCIONAR_FEFO",
-            cmd => cmd.Parameters.Add("p_producto_id", OracleDbType.Int32).Value = productoId,
+            cmd => cmd.Parameters.Add("p_id_producto", OracleDbType.Int32).Value = productoId,
             reader => { if (reader.Read()) resultado = MapearLote(reader); });
         return resultado;
     }
@@ -84,16 +94,14 @@ public class LoteDAO : BaseDAO, ILoteDAO
         int cantidadInicial = reader.GetInt32(reader.GetOrdinal("CANTIDAD_INICIAL"));
         var lote = new Lote(cantidadInicial);
 
-        typeof(Lote).GetProperty(nameof(Lote.Id))?.SetValue(lote, reader.GetInt32(reader.GetOrdinal("ID")));
+        typeof(Lote).GetProperty(nameof(Lote.IdLote))?.SetValue(lote, reader.GetInt32(reader.GetOrdinal("ID_LOTE")));
         typeof(Lote).GetProperty(nameof(Lote.CodigoLote))?.SetValue(lote, LeerString(reader, "CODIGO_LOTE"));
-        typeof(Lote).GetProperty(nameof(Lote.ProductoId))?.SetValue(lote, reader.GetInt32(reader.GetOrdinal("PRODUCTO_ID")));
+        typeof(Lote).GetProperty(nameof(Lote.IdProducto))?.SetValue(lote, reader.GetInt32(reader.GetOrdinal("ID_PRODUCTO")));
         typeof(Lote).GetProperty(nameof(Lote.FechaFabricacion))?.SetValue(lote, reader.GetDateTime(reader.GetOrdinal("FECHA_FABRICACION")));
         typeof(Lote).GetProperty(nameof(Lote.FechaVencimiento))?.SetValue(lote, reader.GetDateTime(reader.GetOrdinal("FECHA_VENCIMIENTO")));
         typeof(Lote).GetProperty(nameof(Lote.PrecioCompra))?.SetValue(lote, reader.GetDecimal(reader.GetOrdinal("PRECIO_COMPRA")));
         typeof(Lote).GetProperty(nameof(Lote.PrecioVenta))?.SetValue(lote, reader.GetDecimal(reader.GetOrdinal("PRECIO_VENTA")));
-        typeof(Lote).GetProperty(nameof(Lote.Estado))?.SetValue(lote, (EstadoLote)reader.GetInt32(reader.GetOrdinal("ESTADO")));
-        typeof(Lote).GetProperty(nameof(Lote.Activo))?.SetValue(lote, LeerBooleano(reader, "ACTIVO"));
-        typeof(Lote).GetProperty(nameof(Lote.FechaCreacion))?.SetValue(lote, reader.GetDateTime(reader.GetOrdinal("FECHA_CREACION")));
+        typeof(Lote).GetProperty(nameof(Lote.Estado))?.SetValue(lote, LeerChar(reader, "ESTADO"));
         typeof(Lote).GetProperty("CantidadActual")?.SetValue(lote, reader.GetInt32(reader.GetOrdinal("CANTIDAD_ACTUAL")));
 
         return lote;

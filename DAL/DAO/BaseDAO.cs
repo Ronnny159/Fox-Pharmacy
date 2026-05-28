@@ -101,4 +101,15 @@ public abstract class BaseDAO
         if (reader.IsDBNull(ordinal)) return null;
         return reader.GetDateTime(ordinal);
     }
+
+    /// <summary>
+    /// Convierte un valor de Oracle a char seguro.
+    /// </summary>
+    protected char LeerChar(OracleDataReader reader, string columna)
+    {
+        int ordinal = reader.GetOrdinal(columna);
+        if (reader.IsDBNull(ordinal)) return ' ';
+        string valor = reader.GetString(ordinal);
+        return string.IsNullOrEmpty(valor) ? ' ' : valor[0];
+    }
 }

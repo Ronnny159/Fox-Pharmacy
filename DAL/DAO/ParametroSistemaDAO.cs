@@ -33,19 +33,18 @@ public class ParametroSistemaDAO : BaseDAO, IParametroSistemaDAO
         {
             cmd.Parameters.Add("p_clave", OracleDbType.Varchar2).Value = parametro.Clave;
             cmd.Parameters.Add("p_valor", OracleDbType.Varchar2).Value = parametro.Valor;
-            cmd.Parameters.Add("p_descripcion", OracleDbType.Varchar2).Value = parametro.Descripcion ?? (object)DBNull.Value;
+            cmd.Parameters.Add("p_desc", OracleDbType.Varchar2).Value = parametro.Descripcion ?? (object)DBNull.Value;
         });
     }
 
     public void Actualizar(ParametroSistema parametro)
     {
-        EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.ACTUALIZAR_PARAMETRO", cmd =>
+        EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.ACTUALIZAR_DESCUENTO_GENERAL", cmd =>
         {
-            cmd.Parameters.Add("p_clave", OracleDbType.Varchar2).Value = parametro.Clave;
             cmd.Parameters.Add("p_nuevo_valor", OracleDbType.Varchar2).Value = parametro.Valor;
-            cmd.Parameters.Add("p_usuario_id", OracleDbType.Int32).Value = 1;
+            cmd.Parameters.Add("p_id_usuario", OracleDbType.Int32).Value = 1;
             cmd.Parameters.Add("p_motivo", OracleDbType.Varchar2).Value = "Actualización desde sistema";
-            cmd.Parameters.Add("p_ip", OracleDbType.Varchar2).Value = "127.0.0.1";
+            cmd.Parameters.Add("p_ip", OracleDbType.Varchar2).Value = (object?)DBNull.Value ?? DBNull.Value;
         });
     }
 
@@ -53,12 +52,10 @@ public class ParametroSistemaDAO : BaseDAO, IParametroSistemaDAO
     {
         return new ParametroSistema
         {
-            Id = reader.GetInt32(reader.GetOrdinal("ID")),
+            IdParametro = reader.GetInt32(reader.GetOrdinal("ID_PARAMETRO")),
             Clave = LeerString(reader, "CLAVE"),
             Valor = LeerString(reader, "VALOR"),
-            Descripcion = LeerString(reader, "DESCRIPCION"),
-            Activo = LeerBooleano(reader, "ACTIVO"),
-            FechaCreacion = reader.GetDateTime(reader.GetOrdinal("FECHA_CREACION"))
+            Descripcion = LeerString(reader, "DESCRIPCION")
         };
     }
 

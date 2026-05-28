@@ -2,9 +2,6 @@ using System;
 
 namespace Entity;
 
-/// <summary>
-/// Estados posibles de un lote en el inventario farmacéutico.
-/// </summary>
 public enum EstadoLote
 {
     Activo = 1,
@@ -13,9 +10,6 @@ public enum EstadoLote
     EnCuarentena = 4
 }
 
-/// <summary>
-/// Tipos de ajuste de inventario según reglamentación sanitaria colombiana.
-/// </summary>
 public enum TipoAjuste
 {
     Averia = 1,
@@ -24,9 +18,6 @@ public enum TipoAjuste
     ConteoCiclico = 4
 }
 
-/// <summary>
-/// Roles de usuario para control de acceso y permisos.
-/// </summary>
 public enum RolUsuario
 {
     Administrador = 1,

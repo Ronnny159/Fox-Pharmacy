@@ -11,21 +11,30 @@ public class AjusteInventarioDAO : BaseDAO, IAjusteInventarioDAO
 
     public void Insertar(AjusteInventario ajuste)
     {
+        char tipoChar = ajuste.Tipo switch
+        {
+            TipoAjuste.Averia => 'A',
+            TipoAjuste.Vencido => 'V',
+            TipoAjuste.RetiroLegal => 'R',
+            TipoAjuste.ConteoCiclico => 'C',
+            _ => 'A'
+        };
+
         EjecutarProcedimiento("PKG_PHARMASMART_CONFIG.REGISTRAR_AJUSTE", cmd =>
         {
-            cmd.Parameters.Add("p_lote_id", OracleDbType.Int32).Value = ajuste.LoteId;
-            cmd.Parameters.Add("p_tipo", OracleDbType.Varchar2).Value = ajuste.Tipo.ToString();
+            cmd.Parameters.Add("p_id_lote", OracleDbType.Int32).Value = ajuste.IdLote;
+            cmd.Parameters.Add("p_tipo", OracleDbType.Char).Value = tipoChar;
             cmd.Parameters.Add("p_cantidad", OracleDbType.Int32).Value = ajuste.Cantidad;
             cmd.Parameters.Add("p_motivo", OracleDbType.Varchar2).Value = ajuste.Motivo;
-            cmd.Parameters.Add("p_responsable_id", OracleDbType.Int32).Value = ajuste.ResponsableId;
+            cmd.Parameters.Add("p_id_responsable", OracleDbType.Int32).Value = ajuste.IdResponsable;
         });
     }
 
     public List<AjusteInventario> ObtenerPorLote(int loteId)
     {
         var lista = new List<AjusteInventario>();
-        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_AJUSTES_POR_LOTE",
-            cmd => cmd.Parameters.Add("p_lote_id", OracleDbType.Int32).Value = loteId,
+        EjecutarCursor("PKG_PHARMASMART_VENTAS.OBTENER_AJUSTES_POR_LOTE",
+            cmd => cmd.Parameters.Add("p_id_lote", OracleDbType.Int32).Value = loteId,
             reader => { while (reader.Read()) lista.Add(MapearAjuste(reader)); });
         return lista;
     }
@@ -33,8 +42,8 @@ public class AjusteInventarioDAO : BaseDAO, IAjusteInventarioDAO
     public List<AjusteInventario> ObtenerPorResponsable(int usuarioId)
     {
         var lista = new List<AjusteInventario>();
-        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_AJUSTES_POR_RESPONSABLE",
-            cmd => cmd.Parameters.Add("p_usuario_id", OracleDbType.Int32).Value = usuarioId,
+        EjecutarCursor("PKG_PHARMASMART_VENTAS.OBTENER_AJUSTES_POR_RESPONSABLE",
+            cmd => cmd.Parameters.Add("p_id_usuario", OracleDbType.Int32).Value = usuarioId,
             reader => { while (reader.Read()) lista.Add(MapearAjuste(reader)); });
         return lista;
     }
@@ -42,7 +51,7 @@ public class AjusteInventarioDAO : BaseDAO, IAjusteInventarioDAO
     public List<AjusteInventario> ObtenerPorRangoFechas(DateTime desde, DateTime hasta)
     {
         var lista = new List<AjusteInventario>();
-        EjecutarCursor("PKG_PHARMASMART_CONFIG.OBTENER_AJUSTES_POR_FECHAS",
+        EjecutarCursor("PKG_PHARMASMART_VENTAS.OBTENER_AJUSTES_POR_FECHAS",
             cmd =>
             {
                 cmd.Parameters.Add("p_desde", OracleDbType.Date).Value = desde;
@@ -56,15 +65,20 @@ public class AjusteInventarioDAO : BaseDAO, IAjusteInventarioDAO
     {
         return new AjusteInventario
         {
-            Id = reader.GetInt32(reader.GetOrdinal("ID")),
-            LoteId = reader.GetInt32(reader.GetOrdinal("LOTE_ID")),
-            Tipo = Enum.Parse<TipoAjuste>(LeerString(reader, "TIPO")),
+            IdAjuste = reader.GetInt32(reader.GetOrdinal("ID_AJUSTE")),
+            IdLote = reader.GetInt32(reader.GetOrdinal("ID_LOTE")),
+            Tipo = LeerChar(reader, "TIPO") switch
+            {
+                'A' => TipoAjuste.Averia,
+                'V' => TipoAjuste.Vencido,
+                'R' => TipoAjuste.RetiroLegal,
+                'C' => TipoAjuste.ConteoCiclico,
+                _ => TipoAjuste.Averia
+            },
             Cantidad = reader.GetInt32(reader.GetOrdinal("CANTIDAD")),
             Motivo = LeerString(reader, "MOTIVO"),
             FechaAjuste = reader.GetDateTime(reader.GetOrdinal("FECHA_AJUSTE")),
-            ResponsableId = reader.GetInt32(reader.GetOrdinal("RESPONSABLE_ID")),
-            Activo = LeerBooleano(reader, "ACTIVO"),
-            FechaCreacion = reader.GetDateTime(reader.GetOrdinal("FECHA_CREACION"))
+            IdResponsable = reader.GetInt32(reader.GetOrdinal("ID_RESPONSABLE"))
         };
     }
 }
