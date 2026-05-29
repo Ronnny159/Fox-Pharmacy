@@ -96,4 +96,28 @@ SELECT COUNT(*) AS LOTES FROM LOTES;
 SELECT COUNT(*) AS CLIENTES FROM CLIENTES;
 SELECT COUNT(*) AS PARAMETROS FROM PARAMETROS_SISTEMA;
 
+COMMIT;
+
+-- ============================================
+-- ACTIVAR TRIGGERS DESPUÉS DE LA CARGA INICIAL
+-- ============================================
+PROMPT ========================================
+PROMPT Activando triggers para operación normal...
+PROMPT ========================================
+
+ALTER TRIGGER TRG_ALERTA_INFLACION ENABLE;
+
+PROMPT TRG_ALERTA_INFLACION: AHORA HABILITADO
+
+-- Verificar estado final
+SELECT 
+    TRIGGER_NAME, 
+    STATUS 
+FROM USER_TRIGGERS 
+ORDER BY TRIGGER_NAME;
+
+PROMPT ========================================
+PROMPT Datos insertados y triggers activados.
+PROMPT ========================================
+
 EXIT;
