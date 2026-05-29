@@ -1,7 +1,7 @@
 using BLL.DTOs;
 using BLL.Interfaces;
 using DAL.Interfaces;
-using Entities;
+using Entity;
 
 namespace BLL.Services;
 

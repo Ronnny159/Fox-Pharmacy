@@ -1,35 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <RootNamespace>BLL</RootNamespace>
-    <AssemblyName>BLL</AssemblyName>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="ParametroService.cs" />
-    <Compile Remove="ProductoService.cs" />
-    <Compile Remove="UsuarioService.cs" />
-    <Compile Remove="VentaService.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="ParametroService.cs" />
-    <None Include="ProductoService.cs" />
-    <None Include="UsuarioService.cs" />
-    <None Include="VentaService.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="Telegram.Bot" Version="19.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DAL\DAL.csproj" />
-    <ProjectReference Include="..\Entity\Entity.csproj" />
-  </ItemGroup>
-
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RootNamespace>BLL</RootNamespace>
+		<AssemblyName>BLL</AssemblyName>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="Telegram.Bot" Version="19.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\DAL\DAL.csproj" />
+		<ProjectReference Include="..\Entity\Entity.csproj" />
+	</ItemGroup>
 </Project>
