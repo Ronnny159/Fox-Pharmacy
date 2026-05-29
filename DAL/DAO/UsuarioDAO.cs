@@ -87,11 +87,6 @@ public class UsuarioDAO : BaseDAO, IUsuarioDAO
         };
     }
 
-    public async Task<Usuario?> ObtenerPorCredencialesAsync(string nombreUsuario, string hashContrasena)
-    {
-        return await Task.Run(() => ObtenerPorCredenciales(nombreUsuario, hashContrasena));
-    }
-
     IEnumerable<Usuario> IUsuarioDAO.ObtenerTodos()
     {
         return ObtenerTodos();
