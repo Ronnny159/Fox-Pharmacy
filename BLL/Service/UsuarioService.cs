@@ -17,6 +17,7 @@ public class UsuarioService : IUsuarioService
 
     public ResultadoOperacion Autenticar(string nombreUsuario, string contrasena)
     {
+        // Tu código existente...
         try
         {
             if (string.IsNullOrWhiteSpace(nombreUsuario))
@@ -53,6 +54,7 @@ public class UsuarioService : IUsuarioService
 
     public ResultadoOperacion ObtenerPorId(int id)
     {
+        // Tu código existente...
         try
         {
             if (id <= 0) return ResultadoOperacion.Fallo("ID no válido.");
@@ -65,11 +67,12 @@ public class UsuarioService : IUsuarioService
 
     public ResultadoOperacion ObtenerTodos()
     {
+        // Tu código existente...
         try
         {
             var usuarios = _usuarioDAO.ObtenerTodos();
-            if (usuarios.Count == 0) return ResultadoOperacion.Exito("No hay usuarios.", new List<object>());
-            return ResultadoOperacion.Exito($"{usuarios.Count} usuario(s) encontrados.", usuarios);
+            if (!usuarios.Any()) return ResultadoOperacion.Exito("No hay usuarios.", new List<object>());
+            return ResultadoOperacion.Exito($"{usuarios.Count()} usuario(s) encontrados.", usuarios);
         }
         catch (Exception ex) { return ResultadoOperacion.Fallo(ex); }
     }

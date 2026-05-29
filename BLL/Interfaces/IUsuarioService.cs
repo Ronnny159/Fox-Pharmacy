@@ -1,5 +1,6 @@
 using System;
 using BLL.DTOs;
+using Entity;
 
 namespace BLL.Interfaces;
 

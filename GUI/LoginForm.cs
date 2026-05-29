@@ -1,5 +1,8 @@
-﻿using BLL;
-using DAL.Interfaces;
+﻿using BLL.Interfaces;
+using BLL.DTOs;
+using BLL.Services;
+using DAL.DAO;
+using DAL.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,14 +17,14 @@ namespace GUI
 {
     public partial class LoginForm : Form
     {
-        private readonly IUsuarioDAO _usuarioDAO;
+        private readonly IUsuarioService _usuarioService;
 
         public LoginForm()
         {
             InitializeComponent();
-           
+            var usuarioDAO = new UsuarioDAO(OracleConnectionManager.Instancia);
+            _usuarioService = new UsuarioService(usuarioDAO);
         }
-
 
         private void btnSalir_Click_1(object sender, EventArgs e)
         {
@@ -57,7 +60,6 @@ namespace GUI
         private void btnRegistrarse_Click(object sender, EventArgs e)
         {
             panelRegistrarse.Visible = true;
-
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
@@ -76,8 +78,8 @@ namespace GUI
             txt2doApellido.BackColor = Color.GhostWhite;
             panel2doApellido.BackColor = Color.GhostWhite;
             txtUsuarioRegistro.BackColor = Color.GhostWhite;
-            panelUsuarioRegistro .BackColor = Color.GhostWhite;
-            txtContraseñaRegistro .BackColor = Color.GhostWhite;
+            panelUsuarioRegistro.BackColor = Color.GhostWhite;
+            txtContraseñaRegistro.BackColor = Color.GhostWhite;
             panelContraseñaRegistro.BackColor = Color.GhostWhite;
         }
 
@@ -163,20 +165,40 @@ namespace GUI
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
+            ResultadoOperacion resultado = _usuarioService.Autenticar(
+                txtUsuario.Text,
+                txtContraseña.Text);
+
+            if (!resultado.Exitoso)
+            {
+                MessageBox.Show(resultado.Mensaje, "Error de acceso",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             AbrirMainForm(this);
         }
 
         private void btnCrearCuenta_Click(object sender, EventArgs e)
         {
+            ResultadoOperacion resultado = _usuarioService.Autenticar(
+                txtUsuarioRegistro.Text,
+                txtContraseñaRegistro.Text);
+
+            if (!resultado.Exitoso)
+            {
+                MessageBox.Show(resultado.Mensaje, "Error de acceso",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             AbrirMainForm(this);
         }
 
         private void AbrirMainForm(Form form)
         {
             MainForm main = new MainForm();
-
             main.Show();
-
             this.Hide();
         }
 
