@@ -41,14 +41,26 @@ public abstract class BaseDAO
 
     /// <summary>
     /// Ejecuta un procedimiento almacenado que retorna un cursor.
+    /// CORREGIDO: Agrega automáticamente el parámetro REF CURSOR de salida.
     /// </summary>
     protected void EjecutarCursor(string nombreProcedimiento, Action<OracleCommand> configurarParametros, Action<OracleDataReader> procesarCursor)
     {
         using var conexion = ObtenerConexion();
         using var comando = new OracleCommand(nombreProcedimiento, conexion);
         comando.CommandType = CommandType.StoredProcedure;
+
+        // 1. Configurar los parámetros de entrada (p_nombre, p_hash, etc.)
         configurarParametros(comando);
+
+        // 2. Agregar el parámetro de salida REF CURSOR (importante: mismo nombre que en Oracle)
+        // Normalmente se llama "p_cursor", "p_refcursor" o "cursor"
+        // Si tu procedimiento usa otro nombre, cámbialo aquí
+        comando.Parameters.Add("p_cursor", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+
+        // 3. Ejecutar y obtener el reader (Oracle automáticamente asigna el cursor al parámetro de salida)
         using var reader = comando.ExecuteReader();
+
+        // 4. Procesar los resultados
         procesarCursor(reader);
     }
 

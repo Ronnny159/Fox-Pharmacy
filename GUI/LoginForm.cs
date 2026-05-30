@@ -206,5 +206,10 @@ namespace GUI
         {
 
         }
+
+        private void txt1erNombre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
