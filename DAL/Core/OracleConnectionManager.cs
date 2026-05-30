@@ -18,10 +18,17 @@ public class OracleConnectionManager : IOracleConnectionFactory
     /// Modificar aquí para apuntar a tu instancia de Oracle.
     /// </summary>
     private OracleConnectionManager()
-    {
-        // CONFIGURAR: Cambia estos valores por los de tu entorno Oracle
-        _cadenaConexion = "User Id=pharmauser;Password=pharmapass;Data Source=localhost:1521/XE;";
-    }
+{
+    string host = "localhost";
+    string puerto = "1521";
+    string servicio = "XE";
+    string usuario = "USUARIO_LUIS";
+    string password = "POWER140507";
+    
+    _cadenaConexion = $"User Id={usuario};Password={password};Data Source={host}:{puerto}/{servicio};";
+    
+    Console.WriteLine($"Usando conexión: {_cadenaConexion}");
+}
 
     /// <summary>
     /// Instancia única del administrador de conexiones.

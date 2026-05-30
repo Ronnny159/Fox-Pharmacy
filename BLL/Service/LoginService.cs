@@ -28,7 +28,6 @@ public class LoginService : ILoginService
             var usuario = _usuarioDAO.ObtenerPorCredenciales(nombreUsuario.Trim().ToLower(), hashContrasena);
             if (usuario == null)
                 return ResultadoOperacion.Fallo("Nombre de usuario o contraseña incorrectos.");
-            return ResultadoOperacion.Exito("Usuario autenticado correctamente.");
         
             var sesion = new
             {
@@ -40,9 +39,11 @@ public class LoginService : ILoginService
                 EsAdministrador = usuario.Rol == '1',
                 PuedeModificarConfiguracion = usuario.Rol == '1'
             };
+
+            return ResultadoOperacion.Exito("Usuario autenticado correctamente.", sesion);
         
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return ResultadoOperacion.Fallo("Error al autenticar el usuario.");
         }
