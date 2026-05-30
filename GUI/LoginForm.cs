@@ -9,12 +9,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GUI
 {
+    [SupportedOSPlatform("windows")]
     public partial class LoginForm : Form
     {
         private readonly IUsuarioService _usuarioService;
@@ -187,7 +189,7 @@ namespace GUI
 
             if (!resultado.Exitoso)
             {
-                MessageBox.Show(resultado.Mensaje, "Error de acceso",
+                MessageBox.Show(resultado.Mensaje, "Error de acceso", 
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
