@@ -523,7 +523,7 @@
             label6.AutoSize = true;
             label6.Font = new System.Drawing.Font("Segoe UI Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             label6.ForeColor = System.Drawing.Color.White;
-            label6.Location = new System.Drawing.Point(118, 428);
+            label6.Location = new System.Drawing.Point(130, 428);
             label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(101, 17);
@@ -543,7 +543,7 @@
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Segoe UI Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            label3.Location = new System.Drawing.Point(132, 338);
+            label3.Location = new System.Drawing.Point(140, 338);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(80, 17);
@@ -555,7 +555,7 @@
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Segoe UI Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             label2.ForeColor = System.Drawing.Color.White;
-            label2.Location = new System.Drawing.Point(113, 404);
+            label2.Location = new System.Drawing.Point(126, 404);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(111, 17);
@@ -568,7 +568,7 @@
             label1.BackColor = System.Drawing.Color.Transparent;
             label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             label1.ForeColor = System.Drawing.Color.White;
-            label1.Location = new System.Drawing.Point(78, 358);
+            label1.Location = new System.Drawing.Point(96, 358);
             label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(169, 32);
