@@ -80,7 +80,7 @@
             btnConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnConfiguracion.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             btnConfiguracion.ForeColor = System.Drawing.Color.Gainsboro;
-            btnConfiguracion.Image = Properties.Resources.ConfigIcon1;
+            btnConfiguracion.Image = (System.Drawing.Image)resources.GetObject("btnConfiguracion.Image");
             btnConfiguracion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnConfiguracion.Location = new System.Drawing.Point(0, 463);
             btnConfiguracion.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -101,7 +101,7 @@
             btnAlertas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnAlertas.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             btnAlertas.ForeColor = System.Drawing.Color.Gainsboro;
-            btnAlertas.Image = Properties.Resources.NotifIcon1;
+            btnAlertas.Image = (System.Drawing.Image)resources.GetObject("btnAlertas.Image");
             btnAlertas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnAlertas.Location = new System.Drawing.Point(0, 410);
             btnAlertas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
