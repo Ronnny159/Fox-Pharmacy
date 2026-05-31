@@ -57,9 +57,10 @@
             // lblRegistrarUsuario
             // 
             lblRegistrarUsuario.AutoSize = true;
+            lblRegistrarUsuario.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             lblRegistrarUsuario.Location = new System.Drawing.Point(50, 34);
             lblRegistrarUsuario.Name = "lblRegistrarUsuario";
-            lblRegistrarUsuario.Size = new System.Drawing.Size(96, 15);
+            lblRegistrarUsuario.Size = new System.Drawing.Size(110, 17);
             lblRegistrarUsuario.TabIndex = 0;
             lblRegistrarUsuario.Text = "Registrar Usuario";
             // 
@@ -74,9 +75,10 @@
             // lblTablaUsuarios
             // 
             lblTablaUsuarios.AutoSize = true;
+            lblTablaUsuarios.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             lblTablaUsuarios.Location = new System.Drawing.Point(419, 34);
             lblTablaUsuarios.Name = "lblTablaUsuarios";
-            lblTablaUsuarios.Size = new System.Drawing.Size(52, 15);
+            lblTablaUsuarios.Size = new System.Drawing.Size(59, 17);
             lblTablaUsuarios.TabIndex = 2;
             lblTablaUsuarios.Text = "Usuarios";
             // 
