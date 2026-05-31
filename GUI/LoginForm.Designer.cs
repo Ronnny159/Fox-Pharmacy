@@ -30,7 +30,6 @@
         {
             btnSalir = new System.Windows.Forms.Button();
             panelIniciarSesion = new System.Windows.Forms.Panel();
-            btnRegistrarse = new System.Windows.Forms.Button();
             btnEntrar = new System.Windows.Forms.Button();
             panelContraseña = new System.Windows.Forms.Panel();
             txtContraseña = new System.Windows.Forms.TextBox();
@@ -73,7 +72,6 @@
             // 
             // panelIniciarSesion
             // 
-            panelIniciarSesion.Controls.Add(btnRegistrarse);
             panelIniciarSesion.Controls.Add(btnEntrar);
             panelIniciarSesion.Controls.Add(panelContraseña);
             panelIniciarSesion.Controls.Add(panelUsuario);
@@ -84,28 +82,13 @@
             panelIniciarSesion.Size = new System.Drawing.Size(525, 563);
             panelIniciarSesion.TabIndex = 15;
             // 
-            // btnRegistrarse
-            // 
-            btnRegistrarse.BackColor = System.Drawing.Color.Transparent;
-            btnRegistrarse.FlatAppearance.BorderSize = 0;
-            btnRegistrarse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btnRegistrarse.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            btnRegistrarse.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            btnRegistrarse.Location = new System.Drawing.Point(302, 333);
-            btnRegistrarse.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            btnRegistrarse.Name = "btnRegistrarse";
-            btnRegistrarse.Size = new System.Drawing.Size(173, 40);
-            btnRegistrarse.TabIndex = 19;
-            btnRegistrarse.Text = "No tienes cuenta?";
-            btnRegistrarse.UseVisualStyleBackColor = false;
-            // 
             // btnEntrar
             // 
             btnEntrar.BackColor = System.Drawing.SystemColors.MenuHighlight;
             btnEntrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             btnEntrar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             btnEntrar.ForeColor = System.Drawing.Color.White;
-            btnEntrar.Location = new System.Drawing.Point(72, 333);
+            btnEntrar.Location = new System.Drawing.Point(184, 333);
             btnEntrar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnEntrar.Name = "btnEntrar";
             btnEntrar.Size = new System.Drawing.Size(173, 40);
@@ -332,7 +315,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TextBox txtContraseña;
         private System.Windows.Forms.TextBox txtUsuario;
-        private System.Windows.Forms.Button btnRegistrarse;
         private System.Windows.Forms.Button btnEntrar;
     }
 }
