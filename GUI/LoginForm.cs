@@ -61,108 +61,12 @@ namespace GUI
 
         private void btnRegistrarse_Click(object sender, EventArgs e)
         {
-            panelRegistrarse.Visible = true;
+            
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
-            panelRegistrarse.Visible = false;
-        }
-
-        private void txtNombre_Click(object sender, EventArgs e)
-        {
-            txt1erNombre.BackColor = Color.White;
-            panel1erNombre.BackColor = Color.White;
-            txt2doNombre.BackColor = Color.GhostWhite;
-            panel2doNombre.BackColor = Color.GhostWhite;
-            txt1erApellido.BackColor = Color.GhostWhite;
-            panel1erApellido.BackColor = Color.GhostWhite;
-            txt2doApellido.BackColor = Color.GhostWhite;
-            panel2doApellido.BackColor = Color.GhostWhite;
-            txtUsuarioRegistro.BackColor = Color.GhostWhite;
-            panelUsuarioRegistro.BackColor = Color.GhostWhite;
-            txtContraseñaRegistro.BackColor = Color.GhostWhite;
-            panelContraseñaRegistro.BackColor = Color.GhostWhite;
-        }
-
-        private void txt2doNombre_Click(object sender, EventArgs e)
-        {
-            txt1erNombre.BackColor = Color.GhostWhite;
-            panel1erNombre.BackColor = Color.GhostWhite;
-            txt2doNombre.BackColor = Color.White;
-            panel2doNombre.BackColor = Color.White;
-            txt1erApellido.BackColor = Color.GhostWhite;
-            panel1erApellido.BackColor = Color.GhostWhite;
-            txt2doApellido.BackColor = Color.GhostWhite;
-            panel2doApellido.BackColor = Color.GhostWhite;
-            txtUsuarioRegistro.BackColor = Color.GhostWhite;
-            panelUsuarioRegistro.BackColor = Color.GhostWhite;
-            txtContraseñaRegistro.BackColor = Color.GhostWhite;
-            panelContraseñaRegistro.BackColor = Color.GhostWhite;
-        }
-
-        private void txt1erApellido_Click(object sender, EventArgs e)
-        {
-            txt1erNombre.BackColor = Color.GhostWhite;
-            panel1erNombre.BackColor = Color.GhostWhite;
-            txt2doNombre.BackColor = Color.GhostWhite;
-            panel2doNombre.BackColor = Color.GhostWhite;
-            txt1erApellido.BackColor = Color.White;
-            panel1erApellido.BackColor = Color.White;
-            txt2doApellido.BackColor = Color.GhostWhite;
-            panel2doApellido.BackColor = Color.GhostWhite;
-            txtUsuarioRegistro.BackColor = Color.GhostWhite;
-            panelUsuarioRegistro.BackColor = Color.GhostWhite;
-            txtContraseñaRegistro.BackColor = Color.GhostWhite;
-            panelContraseñaRegistro.BackColor = Color.GhostWhite;
-        }
-
-        private void txt2doApellido_Click(object sender, EventArgs e)
-        {
-            txt1erNombre.BackColor = Color.GhostWhite;
-            panel1erNombre.BackColor = Color.GhostWhite;
-            txt2doNombre.BackColor = Color.GhostWhite;
-            panel2doNombre.BackColor = Color.GhostWhite;
-            txt1erApellido.BackColor = Color.GhostWhite;
-            panel1erApellido.BackColor = Color.GhostWhite;
-            txt2doApellido.BackColor = Color.White;
-            panel2doApellido.BackColor = Color.White;
-            txtUsuarioRegistro.BackColor = Color.GhostWhite;
-            panelUsuarioRegistro.BackColor = Color.GhostWhite;
-            txtContraseñaRegistro.BackColor = Color.GhostWhite;
-            panelContraseñaRegistro.BackColor = Color.GhostWhite;
-        }
-
-        private void txtUsuarioRegistro_Click(object sender, EventArgs e)
-        {
-            txt1erNombre.BackColor = Color.GhostWhite;
-            panel1erNombre.BackColor = Color.GhostWhite;
-            txt2doNombre.BackColor = Color.GhostWhite;
-            panel2doNombre.BackColor = Color.GhostWhite;
-            txt1erApellido.BackColor = Color.GhostWhite;
-            panel1erApellido.BackColor = Color.GhostWhite;
-            txt2doApellido.BackColor = Color.GhostWhite;
-            panel2doApellido.BackColor = Color.GhostWhite;
-            txtUsuarioRegistro.BackColor = Color.White;
-            panelUsuarioRegistro.BackColor = Color.White;
-            txtContraseñaRegistro.BackColor = Color.GhostWhite;
-            panelContraseñaRegistro.BackColor = Color.GhostWhite;
-        }
-
-        private void txtContraseñaRegistro_Click(object sender, EventArgs e)
-        {
-            txt1erNombre.BackColor = Color.GhostWhite;
-            panel1erNombre.BackColor = Color.GhostWhite;
-            txt2doNombre.BackColor = Color.GhostWhite;
-            panel2doNombre.BackColor = Color.GhostWhite;
-            txt1erApellido.BackColor = Color.GhostWhite;
-            panel1erApellido.BackColor = Color.GhostWhite;
-            txt2doApellido.BackColor = Color.GhostWhite;
-            panel2doApellido.BackColor = Color.GhostWhite;
-            txtUsuarioRegistro.BackColor = Color.GhostWhite;
-            panelUsuarioRegistro.BackColor = Color.GhostWhite;
-            txtContraseñaRegistro.BackColor = Color.White;
-            panelContraseñaRegistro.BackColor = Color.White;
+           
         }
 
         private void btnEntrar_Click(object sender, EventArgs e)
@@ -174,22 +78,6 @@ namespace GUI
             if (!resultado.Exitoso)
             {
                 MessageBox.Show(resultado.Mensaje, "Error de acceso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            AbrirMainForm(this);
-        }
-
-        private void btnCrearCuenta_Click(object sender, EventArgs e)
-        {
-            ResultadoOperacion resultado = _usuarioService.Autenticar(
-                txtUsuarioRegistro.Text,
-                txtContraseñaRegistro.Text);
-
-            if (!resultado.Exitoso)
-            {
-                MessageBox.Show(resultado.Mensaje, "Error de acceso", 
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }

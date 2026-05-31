@@ -33,7 +33,7 @@
             lblCantidadLote = new System.Windows.Forms.Label();
             textBox1 = new System.Windows.Forms.TextBox();
             textBox2 = new System.Windows.Forms.TextBox();
-            comboBox1 = new System.Windows.Forms.ComboBox();
+            cboxCodigoProd = new System.Windows.Forms.ComboBox();
             btnModificarLote = new System.Windows.Forms.Button();
             listExistencias = new System.Windows.Forms.ListView();
             listVencimientos = new System.Windows.Forms.ListView();
@@ -88,13 +88,13 @@
             textBox2.Size = new System.Drawing.Size(194, 23);
             textBox2.TabIndex = 4;
             // 
-            // comboBox1
+            // cboxCodigoProd
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(196, 85);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(194, 23);
-            comboBox1.TabIndex = 5;
+            cboxCodigoProd.FormattingEnabled = true;
+            cboxCodigoProd.Location = new System.Drawing.Point(196, 85);
+            cboxCodigoProd.Name = "cboxCodigoProd";
+            cboxCodigoProd.Size = new System.Drawing.Size(194, 23);
+            cboxCodigoProd.TabIndex = 5;
             // 
             // btnModificarLote
             // 
@@ -214,7 +214,7 @@
             Controls.Add(listVencimientos);
             Controls.Add(listExistencias);
             Controls.Add(btnModificarLote);
-            Controls.Add(comboBox1);
+            Controls.Add(cboxCodigoProd);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
             Controls.Add(lblCantidadLote);
@@ -237,7 +237,7 @@
         private System.Windows.Forms.Label lblCantidadLote;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cboxCodigoProd;
         private System.Windows.Forms.Button btnModificarLote;
         private System.Windows.Forms.ListView listExistencias;
         private System.Windows.Forms.ListView listVencimientos;
